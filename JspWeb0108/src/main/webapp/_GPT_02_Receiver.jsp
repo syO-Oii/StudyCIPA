@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%-- 전달받을 데이터 출력하기 --%>
+	<% String receivedMessage = request.getParameter("message"); %>
+	<h1>내가 받은 메세지 : <%= receivedMessage %></h1>
+</body>
+</html>
