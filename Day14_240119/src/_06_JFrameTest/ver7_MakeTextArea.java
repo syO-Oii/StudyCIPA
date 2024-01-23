@@ -97,24 +97,12 @@ public class ver7_MakeTextArea extends JFrame {
 		ta.setVisible(true);
 		
 		JScrollPane scroll = new JScrollPane(ta);
-		
-		
 	}
-	
-	
-	
 	
 	public static void main(String[] args) {
 		new ver7_MakeTextArea();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	public void confirmExit() {
 		int answer = JOptionPane.showConfirmDialog(this, "종료하시겠습니까?",
 													"확인", JOptionPane.YES_NO_CANCEL_OPTION);
