@@ -27,10 +27,5 @@ public class _02_JdbcDelete {
 		} else {
 			System.out.println("삭제 실패!" + result);
 		}
-		
-		
-		
-		
-		
 	}
 }
