@@ -10,20 +10,20 @@
  - 화면 출력에 관한 메소드가 담겨있는 클래스
 
 ### 3. Crud.class
- CRUD의 주요 기능이 담긴 클래스
+ - CRUD의 주요 기능이 담긴 클래스
 
 
 ### * 더미값
-Update와 Delete의 경우 아래 더미 값을 바탕으로 프로그램을 구현하였습니다.
+ - Update와 Delete의 경우 아래 더미 값을 바탕으로 프로그램을 구현하였습니다.
 
-empnum = 9876
-ename = 홍길동
-job = 사원
-mgr = 7900
-hiredate = 2024-01-25
-sal = 3800
-comm = 200
-deptno = 20
+ empnum = 9876
+ ename = 홍길동
+ job = 사원 
+ mgr = 7900
+ hiredate = 2024-01-25
+ sal = 3800
+ comm = 200
+ deptno = 20
 
 
 ### 메소드 설명
