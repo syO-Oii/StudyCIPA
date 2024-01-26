@@ -64,7 +64,7 @@ class Emp{
 
 public class _02_EmpEx {
 	public static void main(String[] args) {
-		String url = "jdbc:mysql://localhost:3306/baseballstats";
+		String url = "jdbc:mysql://localhost:3306/firm";
 		String id = "root";
 		String pass = "mysql";
 		Connection conn = null;

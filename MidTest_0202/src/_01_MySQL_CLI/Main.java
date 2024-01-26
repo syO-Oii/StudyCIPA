@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class MySql {
+public class Main {
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/firm";	// 데이터베이스 위치 확인
 	private static final String DB_USER = "root";								// 유저 정보(id)
 	private static final String DB_PASSWORD = "mysql";							// 비밀번호
