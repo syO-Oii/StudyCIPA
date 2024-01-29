@@ -31,7 +31,8 @@
     2번 : 사원번호 조회(searchEmpno, callSearchEmpnoScreen) 메소드가 호출됨
 
     (2) searchAll / searchEmpno
-    String sql 변수에 "select * from emp"(searchAll) / "select * from emp where empno = '" + empno + "'" 값을 저장 후 Resultset을 통해 값을 찾아 출력함.
+    String sql 변수에 "select * from emp"(searchAll)
+    "select * from emp where empno = '" + empno + "'" 값을 저장 후 Resultset을 통해 값을 찾아 출력함.
 
 
 #### 3) U : Update
