@@ -15,6 +15,10 @@ public class Crud {
 	Statement stmt = null;
 	Resultset rs = null;
 	int result = 0;
+	
+	public Crud(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
 		
 	// Read - 직원 사번으로 검색
 	void searchEmpno(Connection connection, int empno) throws SQLException {
@@ -23,13 +27,13 @@ public class Crud {
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		while(rs.next()) {
-			System.out.println(" * 이름 : " + rs.getString("ename"));
-			System.out.println(" * 직급 : " + rs.getString("job"));
-			System.out.println(" * 사수 번호 : " + rs.getInt("mgr"));
-			System.out.println(" * 입사일 : " + rs.getString("hiredate"));
-			System.out.println(" * 연봉 : " + rs.getDouble("sal"));
-			System.out.println(" * 성과급 : " + rs.getDouble("comm"));
-			System.out.println(" * 부서 번호 : " + rs.getInt("deptno"));
+			mainFrame.printTa.append(" * 이름 : " + rs.getString("ename"));
+			mainFrame.printTa.append(" * 직급 : " + rs.getString("job"));
+			mainFrame.printTa.append(" * 사수 번호 : " + rs.getInt("mgr"));
+			mainFrame.printTa.append(" * 입사일 : " + rs.getString("hiredate"));
+			mainFrame.printTa.append(" * 연봉 : " + rs.getDouble("sal"));
+			mainFrame.printTa.append(" * 성과급 : " + rs.getDouble("comm"));
+			mainFrame.printTa.append(" * 부서 번호 : " + rs.getInt("deptno"));
 		}
 	}
 	
@@ -39,39 +43,46 @@ public class Crud {
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		while(rs.next()) {
-			System.out.print(rs.getInt("empno") + " \t");
-			System.out.print(rs.getString("ename") + " \t");
-			System.out.print(rs.getString("job") + " \t");
-			System.out.print(rs.getInt("mgr") + " \t");
-			System.out.print(rs.getString("hiredate") + " \t");
-			System.out.print(rs.getDouble("sal") + " \t");
-			System.out.print(rs.getDouble("comm") + " \t");
-			System.out.println(rs.getInt("deptno"));
+			mainFrame.printTa.append(rs.getInt("empno") + " \t");
+			mainFrame.printTa.append(rs.getString("ename") + " \t");
+			mainFrame.printTa.append(rs.getString("job") + " \t");
+			mainFrame.printTa.append(rs.getInt("mgr") + " \t");
+			mainFrame.printTa.append(rs.getString("hiredate") + " \t");
+			mainFrame.printTa.append(rs.getDouble("sal") + " \t");
+			mainFrame.printTa.append(rs.getDouble("comm") + " \t");
+			mainFrame.printTa.append(rs.getInt("deptNo") + "\n");
 		}
+		
 	}
 
 	// insert 기능 구현
 	void createData(Connection connection) throws SQLException {
-		stmt = connection.createStatement();
-		// 일단은 고정값으로 입력하기.
 		sql = "insert into emp values(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')";
-		result = stmt.executeUpdate(sql);
-		if(result == 1) {
-			
-		}		
+		try(Statement stmt = connection.createStatement()) {
+			result = stmt.executeUpdate(sql);
+			mainFrame.printTa.setText("");
+			mainFrame.systemTa.setText("");
+			if(result == 1) {
+				String str = "9876, 홍길동, 사원, 7900, 2024-01-25, 3800.0, 200.0";
+				mainFrame.printTa.append(str);
+				mainFrame.systemTa.append(" 정보 입력이 완료되었습니다.");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			mainFrame.systemTa.setText("에러 발생: " + e.getMessage());
+		}
+
 	}
 	
 	void updateData(Connection connection) throws SQLException {
 		stmt = connection.createStatement();
 		sql = "update emp set sal = 5800 where empno = 9876";
-		System.out.println("정보 수정이 완료되었습니다.");
+		result = stmt.executeUpdate(sql);
+		mainFrame.systemTa.append("홍길동님의 연봉 정보 수정이 완료되었습니다.");
 	}
 	
 	void deleteData(Connection connection) throws SQLException {
 		stmt = connection.createStatement();
-		// SQL 명령어를 String으로 저장 후
-		// int empno;
-		// sql = "delete from emp where empno = " + empno + "\"";		// 따옴표 맞는지 보기
 		sql = "delete from emp where empno = 9876";
 		result = stmt.executeUpdate(sql);
 		
