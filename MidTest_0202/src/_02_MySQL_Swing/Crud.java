@@ -57,7 +57,7 @@ public class Crud {
 		sql = "insert into emp values(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')";
 		result = stmt.executeUpdate(sql);
 		if(result == 1) {
-			mainFrame.systemTa
+			
 		}		
 	}
 	
