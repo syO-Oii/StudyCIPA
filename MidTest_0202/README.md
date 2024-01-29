@@ -20,16 +20,19 @@
 ### 3. Crud.class
      - CRUD의 주요 기능이 담긴 클래스
 #### 1) C : Create 기능
-    - createData : 시트 값을 추가할 수 있는 메소드 (Create) <br>
-     String sql 변수에 더미값을 넣어서 변수를 추가함<br>
-     <br>
+    (1) createData : 시트 값을 추가할 수 있는 메소드 (Create)
+     String sql 변수에 더미값을 넣어서 변수를 추가함
+     
 #### 2) R : read
-    - readData : 전체 조회 기능과 사원번호 검색 조회 기능 구현  (Read)<br>
-    switch문을 통해 출력값을 결정하며 1번 : 전체 조회(searchAll, callSearchAllScreen), 2번 : 사원번호 조회(searchEmpno, callSearchEmpnoScreen) 메소드가 호출됨 <br>
-<br>
-    - searchAll / searchEmpno
-    String sql 변수에 "select * from emp"(searchAll) / "select * from emp where empno = '" + empno + "'" 값을 저장 후 Resultset을 통해 값을 찾아 출력함. <br>
-<br>
+    (1) readData : 전체 조회 기능과 사원번호 검색 조회 기능 구현  (Read)
+    switch문을 통해 출력값을 결정하며
+    1번 : 전체 조회(searchAll, callSearchAllScreen)
+    2번 : 사원번호 조회(searchEmpno, callSearchEmpnoScreen) 메소드가 호출됨
+
+    
+    (2)) searchAll / searchEmpno
+    String sql 변수에 "select * from emp"(searchAll) / "select * from emp where empno = '" + empno + "'" 값을 저장 후 Resultset을 통해 값을 찾아 출력함.
+
 
 #### 3) U : Update
     (1) updateData(Connection connection)
