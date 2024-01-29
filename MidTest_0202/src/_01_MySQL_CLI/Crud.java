@@ -109,7 +109,7 @@ public class Crud {
 		screen.insertAnyKey();
 	}
 	
-	void deleteData(Connection connection, int empno) throws SQLException {
+	void deleteData(Connection connection) throws SQLException {
 		stmt = connection.createStatement();
 		// SQL 명령어를 String으로 저장 후
 		// int empno;
