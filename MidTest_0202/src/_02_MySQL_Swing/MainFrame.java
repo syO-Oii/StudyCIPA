@@ -23,17 +23,30 @@ public class MainFrame extends JFrame implements ActionListener{
 	JButton createButton = new JButton("데이터 추가");
 	JButton readAllButton = new JButton("전체 데이터 조회");
 	JButton readButton = new JButton("사원 조회");
-	JButton updateButton = new JButton("데이터 수정");
 	JButton deleteButton = new JButton("데이터 삭제");
+	
+	
+	JButton updateJobButton = new JButton("변경");
+	JButton updateMgrButton = new JButton("변경");
+	JButton updateSalButton = new JButton("변경");
+	JButton updateDeptnoButton = new JButton("변경");
+	
+	
 	JPanel buttonPanel = new JPanel(new FlowLayout());
 	JPanel textPanel = new JPanel(new FlowLayout());
 	JPanel insertPanel = new JPanel();
 	// 입력값을 받을 수 있는 텍스트필드 생성
-	JTextArea systemTa = new JTextArea("시스템 메세지\n",20,15);
-	JTextArea printTa = new JTextArea("결과값\n",20,30);
+	JTextArea systemTa = new JTextArea("시스템 메세지\n", 20, 15);
+	JTextArea printTa = new JTextArea("결과값\n", 20, 30);
 	JScrollPane scroll1 = new JScrollPane(systemTa);
 	JScrollPane scroll2 = new JScrollPane(printTa);
 
+	JTextField jobTa = new JTextField(7);
+	JTextField mgrTa = new JTextField(7);
+	JTextField salTa = new JTextField(7);
+	JTextField deptnoTa = new JTextField(7);
+	JTextField searchTa = new JTextField(7);
+	
 	Crud crud;
 	Connection sqlConn;
 	Statement stmt;
@@ -53,7 +66,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		String id = "root";		// 로그인 계정
 		String pass = "mysql";  // 비밀번호
 		
-		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			sqlConn = DriverManager.getConnection(url, id, pass);
@@ -65,13 +77,13 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		drowFrame();
 	}
+	
 	void drowFrame() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		conn = this.getContentPane();
 		this.setLocation(500, 400);
-		this.setSize(700, 450);
-		
+		this.setSize(750, 450);
 		
 		JPanel insertJobPanel = new JPanel();
 		JPanel insertMgrPanel = new JPanel();
@@ -87,13 +99,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		JLabel salLabel = new JLabel("연봉 변경");
 		JLabel deptnoLabel = new JLabel("부서 변경");
 		
-				
-		JTextField jobTa = new JTextField(7);
-		JTextField mgrTa = new JTextField(7);
-		JTextField salTa = new JTextField(7);
-		JTextField deptnoTa = new JTextField(7);
-		JTextField searchTa = new JTextField(7);
-		
 		jobTa.setSize(100, 30);
 		mgrTa.setSize(100, 30);
 		salTa.setSize(100, 30);
@@ -104,14 +109,18 @@ public class MainFrame extends JFrame implements ActionListener{
 		insertSearchPanel.add(searchTa);
 		insertJobPanel.add(jobLabel);
 		insertJobPanel.add(jobTa);
+		insertJobPanel.add(updateJobButton);
 		insertMgrPanel.add(mgrLabel);
 		insertMgrPanel.add(mgrTa);
+		insertMgrPanel.add(updateMgrButton);
 		insertSalPanel.add(salLabel);
 		insertSalPanel.add(salTa);
+		insertSalPanel.add(updateSalButton);
 		insertDeptnoPanel.add(deptnoLabel);
 		insertDeptnoPanel.add(deptnoTa);
+		insertDeptnoPanel.add(updateDeptnoButton);
 		
-
+		
 		insertPanel.add(insertSearchPanel);
 		insertPanel.add(insertJobPanel);
 		insertPanel.add(insertMgrPanel);
@@ -122,25 +131,25 @@ public class MainFrame extends JFrame implements ActionListener{
 		createButton.setSize(100, 30);
 		readAllButton.setSize(100, 30);
 		readButton.setSize(100, 30);
-		updateButton.setSize(100, 30);
 		deleteButton.setSize(100, 30);
 				
 		buttonPanel.add(createButton);
 		buttonPanel.add(readAllButton);
 		buttonPanel.add(readButton);
-		buttonPanel.add(updateButton);
 		buttonPanel.add(deleteButton);
 		
-
+		// 버튼 동작 구현
 		createButton.addActionListener(this);
 		readAllButton.addActionListener(this);
 		readButton.addActionListener(this);
-		updateButton.addActionListener(this);
+		updateJobButton.addActionListener(this);
+		updateMgrButton.addActionListener(this);
+		updateSalButton.addActionListener(this);
+		updateDeptnoButton.addActionListener(this);
 		deleteButton.addActionListener(this);
 		
-		// textPanel 내용 세팅
 		
-	
+		// textPanel 내용 세팅
 		textPanel.add(scroll1);
 		textPanel.add(scroll2);
 		
@@ -150,24 +159,31 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
 		try {
+			resetText();
+			
 			if(e.getSource().equals(createButton)) {
-				printTa.setText("");
 				crud.createData(sqlConn);
 			} else if(e.getSource().equals(readAllButton)) {
-				systemTa.setText("전체 조회가 완료되었습니다!");
-				printTa.setText("");
 				crud.searchAll(sqlConn);
 			} else if(e.getSource().equals(readButton)) {
-				printTa.setText("");
+				empno = Integer.parseInt(searchTa.getText());
 				crud.searchEmpno(sqlConn, empno);
-			} else if(e.getSource().equals(updateButton)) {
-				printTa.setText("");
-				crud.updateData(sqlConn);
+			} else if(e.getSource().equals(updateJobButton)) {
+				empno = Integer.parseInt(searchTa.getText());
+				crud.updateJobData(sqlConn, empno);
+			} else if(e.getSource().equals(updateMgrButton)) {
+				empno = Integer.parseInt(searchTa.getText());
+				crud.updateMgrData(sqlConn, empno);
+			} else if(e.getSource().equals(updateSalButton)) {
+				empno = Integer.parseInt(searchTa.getText());
+				crud.updateSalData(sqlConn, empno);
+			} else if(e.getSource().equals(updateDeptnoButton)) {
+				empno = Integer.parseInt(searchTa.getText());
+				crud.updateDeptnoData(sqlConn, empno);
 			} else if(e.getSource().equals(deleteButton)) {
-				printTa.setText("");
-				crud.deleteData(sqlConn);
+				empno = Integer.parseInt(searchTa.getText());
+				crud.deleteData(sqlConn, empno);
 			}
 		} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -180,4 +196,10 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static void main(String[] args) {
 		new MainFrame();
 	}
+	
+	public void resetText() {
+		printTa.setText("");
+		systemTa.setText("");
+	}
+	
 }

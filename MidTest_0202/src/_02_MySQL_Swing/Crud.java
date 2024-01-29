@@ -27,21 +27,23 @@ public class Crud {
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		while(rs.next()) {
-			mainFrame.printTa.append(" * 이름 : " + rs.getString("ename"));
-			mainFrame.printTa.append(" * 직급 : " + rs.getString("job"));
-			mainFrame.printTa.append(" * 사수 번호 : " + rs.getInt("mgr"));
-			mainFrame.printTa.append(" * 입사일 : " + rs.getString("hiredate"));
-			mainFrame.printTa.append(" * 연봉 : " + rs.getDouble("sal"));
-			mainFrame.printTa.append(" * 성과급 : " + rs.getDouble("comm"));
+			mainFrame.printTa.append(" * 이름 : " + rs.getString("ename") + "\n");
+			mainFrame.printTa.append(" * 직급 : " + rs.getString("job") + "\n");
+			mainFrame.printTa.append(" * 사수 번호 : " + rs.getInt("mgr") + "\n");
+			mainFrame.printTa.append(" * 입사일 : " + rs.getString("hiredate") + "\n");
+			mainFrame.printTa.append(" * 연봉 : " + rs.getDouble("sal") + "\n");
+			mainFrame.printTa.append(" * 성과급 : " + rs.getDouble("comm") + "\n");
 			mainFrame.printTa.append(" * 부서 번호 : " + rs.getInt("deptno"));
 		}
+		mainFrame.systemTa.append("사원 검색이 완료되었습니다.");
 	}
 	
 	void searchAll(Connection connection) throws SQLException {
 		sql = "select * from emp";
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		
+		mainFrame.printTa.append("사번\t 이름\t 직급\t 사수\t "
+								+ "입사일\t 연봉\t 성과급 \t 부서번호\n");
 		while(rs.next()) {
 			mainFrame.printTa.append(rs.getInt("empno") + " \t");
 			mainFrame.printTa.append(rs.getString("ename") + " \t");
@@ -52,7 +54,7 @@ public class Crud {
 			mainFrame.printTa.append(rs.getDouble("comm") + " \t");
 			mainFrame.printTa.append(rs.getInt("deptNo") + "\n");
 		}
-		
+		mainFrame.systemTa.append("전체 조회가 완료되었습니다.");
 	}
 
 	// insert 기능 구현
@@ -74,22 +76,47 @@ public class Crud {
 
 	}
 	
-	void updateData(Connection connection) throws SQLException {
+	void updateJobData(Connection connection, int empno) throws SQLException {
 		stmt = connection.createStatement();
-		sql = "update emp set sal = 5800 where empno = 9876";
+		String job = mainFrame.jobTa.getText();
+		sql = "update emp set job = '" + job + "' where empno = " + empno;
 		result = stmt.executeUpdate(sql);
-		mainFrame.systemTa.append("홍길동님의 연봉 정보 수정이 완료되었습니다.");
+		mainFrame.systemTa.append("정보 수정이 완료되었습니다.");
 	}
 	
-	void deleteData(Connection connection) throws SQLException {
+	void updateMgrData(Connection connection, int empno) throws SQLException {
 		stmt = connection.createStatement();
-		sql = "delete from emp where empno = 9876";
+		int mgr = Integer.parseInt(mainFrame.mgrTa.getText());
+		sql = "update emp set mgr = '" + mgr + "' where empno = " + empno;
+		result = stmt.executeUpdate(sql);
+		mainFrame.systemTa.append("정보 수정이 완료되었습니다.");
+	}
+	
+	void updateSalData(Connection connection, int empno) throws SQLException {
+		stmt = connection.createStatement();
+		double sal = Double.parseDouble(mainFrame.salTa.getText());
+		sql = "update emp set sal = '" + sal + "' where empno = " + empno;
+		result = stmt.executeUpdate(sql);
+		mainFrame.systemTa.append("정보 수정이 완료되었습니다.");
+	}
+	
+	void updateDeptnoData(Connection connection, int empno) throws SQLException {
+		stmt = connection.createStatement();
+		int deptno = Integer.parseInt(mainFrame.deptnoTa.getText());
+		sql = "update emp set deptno = '" + deptno + "' where empno = " + empno;
+		result = stmt.executeUpdate(sql);
+		mainFrame.systemTa.append("정보 수정이 완료되었습니다.");
+	}
+	
+	void deleteData(Connection connection, int empno) throws SQLException {
+		stmt = connection.createStatement();
+		sql = "delete from emp where empno = " + empno;
 		result = stmt.executeUpdate(sql);
 		
 		if(result >= 1) {
-			System.out.println("삭제 성공!");
+			mainFrame.systemTa.append("삭제 완료되었습니다.");
 		} else {
-			System.out.println("삭제 실패!");
+			mainFrame.systemTa.append("삭제 실패했습니다.");
 		}
 	}
 	

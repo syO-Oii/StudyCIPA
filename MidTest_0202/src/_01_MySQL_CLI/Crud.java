@@ -18,14 +18,12 @@ public class Crud {
 	
 	// Read : 자료 읽는 기능
 	void readData(Connection connection) throws SQLException {
-		
 		int checkMenu = sc.nextInt();
 		
 		switch(checkMenu) {
 		case 1:
 			screen.callSearchAllScreen();
 			searchAll(connection);
-			
 			break;
 			
 		case 2:
@@ -111,7 +109,7 @@ public class Crud {
 		screen.insertAnyKey();
 	}
 	
-	void deleteData(Connection connection) throws SQLException {
+	void deleteData(Connection connection, int empno) throws SQLException {
 		stmt = connection.createStatement();
 		// SQL 명령어를 String으로 저장 후
 		// int empno;
@@ -126,7 +124,4 @@ public class Crud {
 		}
 		screen.insertAnyKey();
 	}
-	
-
-	
 }
