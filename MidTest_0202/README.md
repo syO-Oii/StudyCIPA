@@ -10,8 +10,9 @@
 
 ### 2. Screen.class
  - 화면 출력에 관한 메소드가 담겨있는 클래스
+
    
-####주요 메소드
+#### 주요 메소드
  - call~ Screen : 각 메뉴 화면을 호출
  - selectMenu, selectUpdateMenu : 메뉴를 선택하라는 메세지를 출력
  - insertAnyKey : 각 메소드 실행 이후 화면을 확인할 수 있도록 잠시 멈추는 기능, 아무 키 입력 시 다음 동작 실행.
