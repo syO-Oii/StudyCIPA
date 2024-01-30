@@ -1,0 +1,17 @@
+1. cmd 실행
+2. sqlplus 입력 - 로그인하기
+3. clear 입력 - cls 입력
+4. conn / as sysdba (connect systemDatabase)
+5. select dbms_xab.gethttpport() from dual;		// 세미콜론 꼭 찍기
+6. exec dbms_xab.sethttpport(9999);				// 포트번호 변경, 이번에는 9999로 설정함
+
+7. JSP 프로젝트 생성하기
+8. src-main-webapp 아래에 jsp 파일 생성
+
+
+
+/* JSP 기본 설정하기 */
+Window - Preference - General - Workspace - Textfile Encoding = utf-8
+					- Web - css files - Encoding file = Korean, EUC-kor
+						  - jsp files - Encoding = ISO 10646/Unicode(UTF-8) 
+

@@ -10,11 +10,10 @@
 
 ### 2. Screen.class
  - 화면 출력에 관한 메소드가 담겨있는 클래스
-
    
 #### 주요 메소드
  - call~ Screen : 각 메뉴 화면을 호출
- - selectMenu, selectUpdateMenu : 메뉴를 선택하라는 메세지를 출력
+ - ~Message : 메뉴를 선택하라는 메세지를 출력
  - insertAnyKey : 각 메소드 실행 이후 화면을 확인할 수 있도록 잠시 멈추는 기능, 아무 키 입력 시 다음 동작 실행.
 
 
@@ -41,11 +40,12 @@
 
 #### 4) D : Delete
     (1) deleteData(Connection connection)
-	- delete from emp where empno = 9876 명령어를 사용하여 더미값을 넣어줌
+	- delete from emp where empno = '입력값' 을 통해 삭제를 원하는 직원의 정보를 삭제함
+    - 삭제 할 정보가 없을 경우(사번을 잘못 입력하거나 이미 삭제된 경우) "삭제 실패" 메세지가 뜨도록 함.
 
 
 ### * 더미값
- - Update와 Delete의 경우 아래 더미 값을 바탕으로 프로그램을 구현함
+ - Update의 경우 아래 더미 값을 바탕으로 프로그램을 구현함
 
  empnum = 9876<br>
  ename = 홍길동<br>

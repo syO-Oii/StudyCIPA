@@ -19,27 +19,26 @@ public class Main {
 			boolean exit = false;	// 프로그램 실행 여부 확인
 			
 			while (!exit) {
-				myScreen.callMainScreen();
+				myScreen.mainScreen();
 
 				int choice = sc.nextInt();
 				
 				switch (choice) {
 				case 1:		// 데이터 조회
-					myScreen.callReadScreen();
+					myScreen.readScreen();
 					crud.readData(connection);
 					break;
 				case 2:		// 데이터 추가
-					myScreen.callCreateScreen();
+					myScreen.createScreen();
 					crud.createData(connection);
 					break;
 				case 3:		// 데이터 수정
-					//myScreen.callUpdateScreen();
 					crud.updateData(connection);
 					
 					break;
 				case 4:		// 데이터 삭제
-					myScreen.callDeleteScreen();
-					crud.deleteData(connection);
+					myScreen.deleteScreen();
+					crud.deleteData(connection, crud.getEmpno());
 					break;
 					
 				case 0:
@@ -58,3 +57,10 @@ public class Main {
 		}	
 	}
 }
+
+
+
+
+
+
+
