@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Screen {
 	
 	Crud crud = new Crud();
+	int empno = 0;
+	String job = null;
+	int mgr = 0;
+	double sal = 0;
+	int deptno = 0;
 	
 	boolean checkSelect = false;
 	Scanner sc = new Scanner(System.in);
@@ -97,6 +102,7 @@ public class Screen {
 		System.out.println("=======================================");
 		System.out.println("============= 데이터 추가 =============");
 		System.out.println("=======================================");
+		crud.createData();
 	}
 	
 	public void updateScreen() {
@@ -110,6 +116,49 @@ public class Screen {
 		System.out.println("|   4. 부서 변경                      |");
 		System.out.println("|   0. 초기 화면으로 돌아가기         |");
 		System.out.println("=======================================");
+		
+		boolean check = false;
+		
+		
+		while(!check) {
+			selectMessage();
+			int selectMenu = Integer.parseInt(sc.nextLine());
+			
+			
+			switch(selectMenu) {
+				case 1:
+					
+				case 2:
+					System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
+					empno = Integer.parseInt(sc.nextLine());
+					System.out.print("새로운 사수 번호를 입력하세요 : ");
+					mgr = Integer.parseInt(sc.nextLine());
+					crud.changeMgr(empno, mgr);
+					check = true;
+					break;
+				case 3:
+					System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
+					empno = Integer.parseInt(sc.nextLine());
+					System.out.print("연봉 정보를 입력하세요 : ");
+					sal = Double.parseDouble(sc.nextLine());
+					crud.changeSal(empno, sal);
+					check = true;
+					break;
+				case 4:
+					System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
+					empno = Integer.parseInt(sc.nextLine());
+					System.out.print("바꿀 부서 번호를 입력하세요 : ");
+					deptno = Integer.parseInt(sc.nextLine());
+					crud.changeDeptno(empno, deptno);
+					check = true;
+					break;
+				case 0:
+					check = true;
+					break;
+				default:
+					System.out.println("다시 선택하세요.");
+			}
+		}
 	}
 	
 	public void jobUpdateScreen() {
@@ -117,6 +166,14 @@ public class Screen {
 		System.out.println("=======================================");
 		System.out.println("============== 직급 변경 ==============");
 		System.out.println("=======================================");
+		
+		System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
+		empno = Integer.parseInt(sc.nextLine());
+		System.out.print("바꾸실 직급 명을 입력하세요 : ");
+		job = sc.nextLine();
+		crud.changeJob(empno, job);
+		check = true;
+		break;
 	}
 	
 	public void mgrUpdateScreen() {

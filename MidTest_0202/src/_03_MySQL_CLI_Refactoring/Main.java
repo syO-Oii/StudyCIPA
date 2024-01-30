@@ -11,12 +11,11 @@ public class Main {
 	private static final String DB_PASSWORD = "mysql";							// 비밀번호
 	
 	public static void main(String[] args) {
-		
-		
-		
+
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {	// 연결 시도
-			Crud crud = new Crud(connection);
-			Screen myScreen = new Screen(connection);
+			Crud crud = new Crud();
+			crud.getConnection(connection);
+			Screen myScreen = new Screen();
 			Scanner sc = new Scanner(System.in);
 			boolean exit = false;	// 프로그램 실행 여부 확인
 			

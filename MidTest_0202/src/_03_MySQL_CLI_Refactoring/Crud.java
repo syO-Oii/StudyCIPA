@@ -26,7 +26,7 @@ public class Crud {
 	double comm;		// 커미션
 	String deptno;		// 부서번호
 	
-	Crud(Connection connection){
+	void getConnection(Connection connection) {
 		this.connection = connection;
 	}
 	
@@ -88,11 +88,9 @@ public class Crud {
 			System.out.println(" * 부서 번호 : " + rs.getInt("deptno"));
 		}
 	}
-	
-	
 
 	// insert 기능 구현
-	void createData(Connection connection) throws SQLException {
+	void createData() throws SQLException {
 		stmt = connection.createStatement();
 		sql = "insert into emp values(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')";
 		result = stmt.executeUpdate(sql);
@@ -101,54 +99,8 @@ public class Crud {
 		}		
 		screen.insertAnyKey();
 	}
-	
-	void updateData(Connection connection) throws SQLException {
-		screen.updateScreen();
-		int selectMenu = 0;
-		boolean check = false;
 		
-		
-		while(!check) {
-			screen.selectMessage();
-			selectMenu = Integer.parseInt(sc.nextLine());
-			
-			switch(selectMenu) {
-			case 1:
-				jobUpdateData(connection);
-				check = true;
-				break;
-			case 2:
-				screen.mgrUpdateScreen();
-				mgrUpdateData(connection);
-				check = true;
-				break;
-			case 3:
-				screen.salUpdateScreen();
-				salUpdateData(connection);
-				check = true;
-				break;
-			case 4:
-				screen.deptnoUpdateScreen();
-				deptnoUpdateData(connection);
-				check = true;
-				break;
-			case 0:
-				check = true;
-				break;
-			default:
-				System.out.println("다시 선택하세요.");
-			}
-		}
-	}
-	
-	void jobUpdateData(Connection connection) throws SQLException {
-		screen.jobUpdateScreen();
-		
-		System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
-		int empno = Integer.parseInt(sc.nextLine());
-		System.out.print("바꾸실 직급 명을 입력하세요 : ");
-		String job = sc.nextLine();
-		
+	void changeJob(int empno, String job) throws SQLException {		
 		stmt = connection.createStatement();
 		sql = "update emp set job = '" + job + "' where empno = " + empno;
 		result = stmt.executeUpdate(sql);
@@ -161,14 +113,7 @@ public class Crud {
 		screen.insertAnyKey();
 	}
 	
-	void mgrUpdateData(Connection connection) throws SQLException {
-		screen.jobUpdateScreen();
-		
-		System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
-		int empno = Integer.parseInt(sc.nextLine());
-		System.out.print("새로운 사수 번호를 입력하세요 : ");
-		int mgr = Integer.parseInt(sc.nextLine());
-		
+	void changeMgr(int empno, int mgr) throws SQLException {		
 		stmt = connection.createStatement();
 		sql = "update emp set mgr = '" + mgr + "' where empno = " + empno;
 		result = stmt.executeUpdate(sql);
@@ -181,14 +126,7 @@ public class Crud {
 		screen.insertAnyKey();
 	}
 	
-	void salUpdateData(Connection connection) throws SQLException {
-		screen.jobUpdateScreen();
-		
-		System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
-		int empno = Integer.parseInt(sc.nextLine());
-		System.out.print("연봉 정보를 입력하세요 : ");
-		double sal = Double.parseDouble(sc.nextLine());
-		
+	void changeSal(int empno, double sal) throws SQLException {
 		stmt = connection.createStatement();
 		sql = "update emp set sal = '" + sal + "' where empno = " + empno;
 		result = stmt.executeUpdate(sql);
@@ -201,14 +139,7 @@ public class Crud {
 		screen.insertAnyKey();
 	}
 	
-	void deptnoUpdateData(Connection connection) throws SQLException {
-		screen.jobUpdateScreen();
-		
-		System.out.print("수정 할 사원의 사원번호를 입력하세요 : ");
-		int empno = Integer.parseInt(sc.nextLine());
-		System.out.print("바꿀 부서 번호를 입력하세요 : ");
-		int deptno = Integer.parseInt(sc.nextLine());
-		
+	void changeDeptno(int empno, int deptno) throws SQLException {	
 		stmt = connection.createStatement();
 		sql = "update emp set deptno = '" + deptno + "' where empno = " + empno;
 		result = stmt.executeUpdate(sql);
