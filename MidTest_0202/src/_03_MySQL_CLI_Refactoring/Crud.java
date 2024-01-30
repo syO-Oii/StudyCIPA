@@ -1,4 +1,4 @@
-package _01_MySQL_CLI;
+package _03_MySQL_CLI_Refactoring;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,13 +9,14 @@ import java.util.Scanner;
 import com.mysql.cj.protocol.Resultset;
 
 public class Crud {
-	Scanner sc = new Scanner(System.in);
+	Connection connection;
 	String sql = null;
 	Statement stmt = null;
 	Resultset rs = null;
-	int result = 0;
-	Screen screen = new Screen();
 	
+	Screen screen = new Screen();	
+	Scanner sc = new Scanner(System.in);
+	int result = 0;	
 	int empno;			// 사번
 	String ename;		// 직원명
 	String job;			// 직급
@@ -25,45 +26,32 @@ public class Crud {
 	double comm;		// 커미션
 	String deptno;		// 부서번호
 	
+	Crud(Connection connection){
+		this.connection = connection;
+	}
+	
 	
 	// Read : 자료 읽는 기능
-	void readData(Connection connection) throws SQLException {
+	void readData() throws SQLException {
 		int checkMenu = Integer.parseInt(sc.nextLine());
 		
 		switch(checkMenu) {
 		case 1:
-			screen.searchAllScreen();
-			searchAll(connection);
+			screen.readAllScreen();
+			readAll();
 			break;
 			
 		case 2:
-			screen.searchEmpScreen();
+			screen.readEmpScreen();
 			System.out.println("정보를 조회 할 사원 번호를 입력하세요.");
 			System.out.print(" * 사원 번호 : ");
 			int empno = Integer.parseInt(sc.nextLine());
-			searchEmpno(connection, empno);
+			readEmpno(empno);
 		}
 		screen.insertAnyKey();
 	}
 	
-	// Read - 직원 사번으로 검색
-	void searchEmpno(Connection connection, int empno) throws SQLException {
-		sql = "select * from emp where empno = '" + empno + "'";
-		stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		
-		while(rs.next()) {
-			System.out.println(" * 이름 : " + rs.getString("ename"));
-			System.out.println(" * 직급 : " + rs.getString("job"));
-			System.out.println(" * 사수 번호 : " + rs.getInt("mgr"));
-			System.out.println(" * 입사일 : " + rs.getString("hiredate"));
-			System.out.println(" * 연봉 : " + rs.getDouble("sal"));
-			System.out.println(" * 성과급 : " + rs.getDouble("comm"));
-			System.out.println(" * 부서 번호 : " + rs.getInt("deptno"));
-		}
-	}
-	
-	void searchAll(Connection connection) throws SQLException {
+	void readAll() throws SQLException {
 		sql = "select * from emp";
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
@@ -78,7 +66,30 @@ public class Crud {
 			System.out.print(rs.getDouble("comm") + " \t");
 			System.out.println(rs.getInt("deptno"));
 		}
+		
+		
 	}
+	
+	// Read - 직원 사번으로 검색
+	void readEmpno(int empno) throws SQLException {
+		sql = "select * from emp where empno = '" + empno + "'";
+		stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		// 여기에 이상한 값 입력되었을 때의 해결코드를 쓰기
+		
+		while(rs.next()) {
+			System.out.println(" * 이름 : " + rs.getString("ename"));
+			System.out.println(" * 직급 : " + rs.getString("job"));
+			System.out.println(" * 사수 번호 : " + rs.getInt("mgr"));
+			System.out.println(" * 입사일 : " + rs.getString("hiredate"));
+			System.out.println(" * 연봉 : " + rs.getDouble("sal"));
+			System.out.println(" * 성과급 : " + rs.getDouble("comm"));
+			System.out.println(" * 부서 번호 : " + rs.getInt("deptno"));
+		}
+	}
+	
+	
 
 	// insert 기능 구현
 	void createData(Connection connection) throws SQLException {
