@@ -13,8 +13,6 @@ public class Crud {
 	String sql = null;
 	Statement stmt = null;
 	Resultset rs = null;
-	
-	Screen screen = new Screen();	
 	Scanner sc = new Scanner(System.in);
 	int result = 0;	
 	int empno;			// 사번
@@ -26,29 +24,8 @@ public class Crud {
 	double comm;		// 커미션
 	String deptno;		// 부서번호
 	
-	void getConnection(Connection connection) {
+	public void setConnection(Connection connection) {
 		this.connection = connection;
-	}
-	
-	
-	// Read : 자료 읽는 기능
-	void readData() throws SQLException {
-		int checkMenu = Integer.parseInt(sc.nextLine());
-		
-		switch(checkMenu) {
-		case 1:
-			screen.readAllScreen();
-			readAll();
-			break;
-			
-		case 2:
-			screen.readEmpScreen();
-			System.out.println("정보를 조회 할 사원 번호를 입력하세요.");
-			System.out.print(" * 사원 번호 : ");
-			int empno = Integer.parseInt(sc.nextLine());
-			readEmpno(empno);
-		}
-		screen.insertAnyKey();
 	}
 	
 	void readAll() throws SQLException {
@@ -65,9 +42,7 @@ public class Crud {
 			System.out.print(rs.getDouble("sal") + " \t");
 			System.out.print(rs.getDouble("comm") + " \t");
 			System.out.println(rs.getInt("deptno"));
-		}
-		
-		
+		}	
 	}
 	
 	// Read - 직원 사번으로 검색
@@ -97,7 +72,6 @@ public class Crud {
 		if(result == 1) {
 			System.out.println("입력 성공!");
 		}		
-		screen.insertAnyKey();
 	}
 		
 	void changeJob(int empno, String job) throws SQLException {		
@@ -110,7 +84,6 @@ public class Crud {
 		} else {
 			System.out.println("정보 수정이 실패했습니다.");
 		}
-		screen.insertAnyKey();
 	}
 	
 	void changeMgr(int empno, int mgr) throws SQLException {		
@@ -123,7 +96,6 @@ public class Crud {
 		} else {
 			System.out.println("정보 수정이 실패했습니다.");
 		}
-		screen.insertAnyKey();
 	}
 	
 	void changeSal(int empno, double sal) throws SQLException {
@@ -136,7 +108,6 @@ public class Crud {
 		} else {
 			System.out.println("정보 수정이 실패했습니다.");
 		}
-		screen.insertAnyKey();
 	}
 	
 	void changeDeptno(int empno, int deptno) throws SQLException {	
@@ -149,10 +120,9 @@ public class Crud {
 		} else {
 			System.out.println("정보 수정이 실패했습니다.");
 		}
-		screen.insertAnyKey();
 	}
 	
-	void deleteData(Connection connection, int empno) throws SQLException {
+	void deleteData(int empno) throws SQLException {
 		stmt = connection.createStatement();
 		sql = "delete from emp where empno = " + empno;		// 따옴표 맞는지 보기
 		result = stmt.executeUpdate(sql);
@@ -162,24 +132,5 @@ public class Crud {
 		} else {
 			System.out.println("삭제 실패!");
 		}
-		screen.insertAnyKey();
-	}
-	
-	int getEmpno() {
-		boolean check = false;
-		int putEmpno = 0;
-		while(!check) {
-			try {
-				screen.deleteMessage();
-			    putEmpno = Integer.parseInt(sc.nextLine());
-			    check = true;
-			    return putEmpno;
-			} catch (NumberFormatException e) {
-			    // 예외 발생 시 처리
-			    System.out.println("올바른 숫자를 입력하세요.");
-			    putEmpno = -1;
-			}
-		}
-		return putEmpno;	
 	}
 }
