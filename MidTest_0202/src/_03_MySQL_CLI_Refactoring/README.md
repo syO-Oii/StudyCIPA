@@ -22,7 +22,8 @@
      - CRUD의 주요 기능이 담긴 클래스
 #### 1) C : Create 기능
      (1) createData : 시트 값을 추가할 수 있는 메소드 (Create)
-     String sql 변수에 더미값을 넣어서 변수를 추가함
+      - String sql 변수에 더미값을 넣어서 변수를 추가함
+      - 더미값 내용 : insert into emp values(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')
      
 #### 2) R : Read 기능
     (1) readAll() : select * from emp 문장을 사용하여 전체 직원 정보를 호출
