@@ -31,7 +31,7 @@ public class Crud {
 			mainFrame.printTa.append(" * 직급 : " + rs.getString("job") + "\n");
 			mainFrame.printTa.append(" * 사수 번호 : " + rs.getInt("mgr") + "\n");
 			mainFrame.printTa.append(" * 입사일 : " + rs.getString("hiredate") + "\n");
-			mainFrame.printTa.append(" * 연봉 : " + rs.getDouble("sal") + "\n");
+			mainFrame.printTa.append(" * 급여 : " + rs.getDouble("sal") + "\n");
 			mainFrame.printTa.append(" * 성과급 : " + rs.getDouble("comm") + "\n");
 			mainFrame.printTa.append(" * 부서 번호 : " + rs.getInt("deptno"));
 		}
@@ -43,7 +43,7 @@ public class Crud {
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		mainFrame.printTa.append("사번\t 이름\t 직급\t 사수\t "
-								+ "입사일\t 연봉\t 성과급 \t 부서번호\n");
+								+ "입사일\t 급여\t 성과급 \t 부서번호\n");
 		while(rs.next()) {
 			mainFrame.printTa.append(rs.getInt("empno") + " \t");
 			mainFrame.printTa.append(rs.getString("ename") + " \t");
@@ -59,21 +59,37 @@ public class Crud {
 
 	// insert 기능 구현
 	void createData(Connection connection) throws SQLException {
-		sql = "insert into emp values(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')";
-		try(Statement stmt = connection.createStatement()) {
-			result = stmt.executeUpdate(sql);
-			mainFrame.printTa.setText("");
-			mainFrame.systemTa.setText("");
-			if(result == 1) {
-				String str = "9876, 홍길동, 사원, 7900, 2024-01-25, 3800.0, 200.0";
-				mainFrame.printTa.append(str);
-				mainFrame.systemTa.append(" 정보 입력이 완료되었습니다.");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			mainFrame.systemTa.setText("에러 발생: " + e.getMessage());
-		}
+		int newEmpno = 9876;
 
+	    // 사원번호가 중복되는지 확인
+	    String checkDuplicateSql = "SELECT COUNT(*) FROM emp WHERE empno = " + newEmpno;
+
+	    try (Statement checkStmt = connection.createStatement();
+	         ResultSet resultSet = checkStmt.executeQuery(checkDuplicateSql)) {
+	        resultSet.next();
+	        int rowCount = resultSet.getInt(1);
+
+	        if (rowCount > 0) {
+	            // 이미 해당 사원번호가 존재하는 경우
+	            mainFrame.systemTa.setText("에러 발생\n이미 존재하는 사원번호입니다.");
+	        } else {
+	            // 사원번호가 중복되지 않는 경우에만 추가
+	            sql = "INSERT INTO emp VALUES(9876, '홍길동', '사원', '7900', '2024-01-25', '3800', '200', '20')";
+	            try (Statement stmt = connection.createStatement()) {
+	                result = stmt.executeUpdate(sql);
+	                mainFrame.printTa.setText("");
+	                mainFrame.systemTa.setText("");
+	                if (result == 1) {
+	                    String str = "9876, 홍길동, 사원, 7900, 2024-01-25, 3800.0, 200.0";
+	                    mainFrame.printTa.append(str);
+	                    mainFrame.systemTa.append(" 정보 입력이 완료되었습니다.");
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	                mainFrame.systemTa.setText("에러 발생: " + e.getMessage());
+	            }
+	        }
+	    }
 	}
 	
 	void updateJobData(Connection connection, int empno) throws SQLException {

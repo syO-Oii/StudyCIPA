@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JPanel textPanel = new JPanel(new FlowLayout());
 	JPanel insertPanel = new JPanel();
 	// 입력값을 받을 수 있는 텍스트필드 생성
-	JTextArea systemTa = new JTextArea("시스템 메세지\n", 20, 15);
+	JTextArea systemTa = new JTextArea("시스템 메세지\n", 20, 18);
 	JTextArea printTa = new JTextArea("결과값\n", 20, 30);
 	JScrollPane scroll1 = new JScrollPane(systemTa);
 	JScrollPane scroll2 = new JScrollPane(printTa);
@@ -83,7 +83,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 		conn = this.getContentPane();
 		this.setLocation(500, 400);
-		this.setSize(750, 450);
+		this.setSize(780, 450);
 		
 		JPanel insertJobPanel = new JPanel();
 		JPanel insertMgrPanel = new JPanel();
@@ -96,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		JLabel searchLabel = new JLabel("사번 검색");
 		JLabel jobLabel = new JLabel("직급 변경");
 		JLabel mgrLabel = new JLabel("사수 변경");
-		JLabel salLabel = new JLabel("연봉 변경");
+		JLabel salLabel = new JLabel("급여 변경");
 		JLabel deptnoLabel = new JLabel("부서 변경");
 		
 		jobTa.setSize(100, 30);
@@ -186,9 +186,14 @@ public class MainFrame extends JFrame implements ActionListener{
 				crud.deleteData(sqlConn, empno);
 			}
 		} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				systemTa.setText("에러 발생: " + e1.getMessage());
+			if (e1.getMessage() != null && e1.getMessage().contains("NullPointerException")) {
+	            systemTa.setText("에러 발생: 버튼 값이 비어 있습니다.");
+	        } else {
+	            e1.printStackTrace();
+	            systemTa.setText("에러 발생: " + e1.getMessage());
+	        }
+		} catch (NumberFormatException ex) {
+			systemTa.setText("에러 발생!!\n정확한 값을 입력 해 주세요");
 		}
 	}
 	
