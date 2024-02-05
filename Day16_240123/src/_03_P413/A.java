@@ -33,9 +33,9 @@ public class A {
 	// 단 field1, method1()의 경우 지역멤버가 아니기 때문에 바로 사용이 어렵다.
 	static class C{
 		void method() {
-			field1 = 15;
-			method1();
-			System.out.println("method(), " + field1);
+		//	field1 = 15;
+		//	method1();
+			//System.out.println("method(), " + field1);
 		}
 	}
 }

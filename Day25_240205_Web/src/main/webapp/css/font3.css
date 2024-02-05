@@ -1,0 +1,15 @@
+html {
+    font: 15px;
+}
+
+article h1{
+    font-size: 3rem;
+}
+
+article p{
+    font-size: 2rem;
+}
+
+article a{
+    font-size: 0.8rem;
+}

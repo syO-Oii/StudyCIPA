@@ -1,9 +1,5 @@
 package _03_Java_lang_Class;
 
-
-class Car { }
-
-
 public class _01_ClassEx2_readFile {
 	public static void main(String[] args) throws ClassNotFoundException {
 		Class clazz = Car.class;

@@ -19,12 +19,12 @@ public class Outter {
 
 		class Inner {
 			public void method() {
-				int result = arg + localVar;
+				//int result = arg + localVar;
 				
-				int result1 = arg + localVar1;
+				//int result1 = arg + localVar1;
 				
-				System.out.println(result);
-				System.out.println(result1);
+				//System.out.println(result);
+				//System.out.println(result1);
 				
 			}
 		}
