@@ -160,7 +160,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Day23_240201_Web" path="/Day23_240201_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day23_240201_Web"/><Context docBase="LotteGiantsManagement" path="/LotteGiantsManagement" reloadable="true" source="org.eclipse.jst.jee.server:LotteGiantsManagement"/><Context docBase="Day24_240202_Web" path="/Day24_240202_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day24_240202_Web"/><Context docBase="Day25_240205_Web" path="/Day25_240205_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day25_240205_Web"/></Host>
+      <Context docBase="Day23_240201_Web" path="/Day23_240201_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day23_240201_Web"/><Context docBase="LotteGiantsManagement" path="/LotteGiantsManagement" reloadable="true" source="org.eclipse.jst.jee.server:LotteGiantsManagement"/><Context docBase="Day24_240202_Web" path="/Day24_240202_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day24_240202_Web"/><Context docBase="Day25_240205_Web" path="/Day25_240205_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day25_240205_Web"/><Context docBase="Day26_240206_Web" path="/Day26_240206_Web" reloadable="true" source="org.eclipse.jst.jee.server:Day26_240206_Web"/><Context docBase="Day26_240206_Web2" path="/Day26_240206_Web2" reloadable="true" source="org.eclipse.jst.jee.server:Day26_240206_Web2"/></Host>
     </Engine>
   </Service>
 </Server>
