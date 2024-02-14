@@ -10,8 +10,14 @@
     // 지정된 글 번호 얻기
     int num = Integer.parseInt(request.getParameter("num"));
 	
+	String memberId = (String)session.getAttribute("MEMBERID");
+	if (memberId == null) {
+		response.sendRedirect("sessionLoginForm.jsp");
+	}
+
+    
 	BoardDao dao = BoardDao.getInstanse();
-	Board board = dao.selectOne(num);	// selectOne 호출
+	Board board = dao.selectOne(num, true);	// selectOne 호출
 %>
 
 <!DOCTYPE html>

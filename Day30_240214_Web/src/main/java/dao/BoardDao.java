@@ -56,38 +56,31 @@ public class BoardDao {
 		return list;
 	}
 	
-	public Board selectOne(int num) {
-		String writer  = "";
-	    String title   = "";
-	    String content = "";
-	    String regtime = "";
-	    int    hits    = 0;
-		
-	    Board board = new Board(num, writer, title, content, regtime, hits);
+	public Board selectOne(int num, boolean inc) {	
+	    Board board = null;
 	    
 	    String sql = "select * from board where num=" + num;
 		PreparedStatement pstmt;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 	            
 	            // 글 데이터를 변수에 저장
-	            board.setWriter(rs.getString("writer"));
-	            board.setTitle(rs.getString("title"));
-	            board.setContent(rs.getString("content"));
-	            board.setRegtime(rs.getString("regtime"));
-	            board.setHits(rs.getInt   ("hits"   ));
-	    
-	            // 글 제목과 내용이 웹 페이지에 올바르게 출력되도록 
-	            // 공백과 줄 바꿈 처리
-	            board.setTitle(board.getTitle().replace(" ", "&nbsp;"));
-	            board.setContent(board.getContent().replace(" ", "&nbsp;").replace("\n", "<br>"));;
+				board = new Board(rs.getInt("num"),
+								  rs.getString("writer"),
+								  rs.getString("title"),
+								  rs.getString("content"),
+								  rs.getString("regtime"),
+								  rs.getInt("hits"));
 	            
-	            // 이 글의 조회수를 1 올림
-	            pstmt.executeUpdate("update board set hits=hits+1 where num=" + num);
+				if(inc) {
+					pstmt.executeUpdate("update board set hits = hits+1 where num = " + num);
+				}
+
 	        }
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -95,5 +88,19 @@ public class BoardDao {
 		
 		return board;
 	}
+	
+	public int delete(int num) {
+		return 0;
+	}
+	
+	public int insert(Board board) {
+		return 0;
+	}
+	
+	public int update(int num) {
+		return 0;
+	}
+	
+	
 	
 }
