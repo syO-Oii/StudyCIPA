@@ -13,13 +13,14 @@
 	boolean login = false;
 	// Mysql 접속 후 로그인 체크
 	String sql = "SELECT count(*) from board where num = ? and writer = ?";
-	Class.forName("oracle.jdbc.driver.OracleDriver");
+	Class.forName("com.mysql.cj.jdbc.Driver");
 	try (
 		Connection conn = DriverManager.getConnection(
-				"jdbc:oracle:thin:@localhost:1521:xe", "manager", "rlaxogud");
+				"jdbc:mysql://localhost:3306/project1", "root", "mysql");
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 	) {
 		pstmt.setString(1, id);
+		//pstmt.setInt(1, Integer.parseInt(id));
 		pstmt.setString(2, password);
 		try(ResultSet rs = pstmt.executeQuery()) {
 			rs.next();
@@ -35,6 +36,7 @@
 	
 	if (login) {
 		session.setAttribute("MEMBERID", id);
+		response.sendRedirect("list.jsp");
 %>
 <html>
 <head><title>로그인성공</title></head>

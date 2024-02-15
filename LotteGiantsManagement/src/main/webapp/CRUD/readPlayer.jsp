@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>롯데자이언츠 선수 관리</title>
+<link rel="stylesheet"href="style/readPlayer.css">
 </head>
 <body>
 <h1>롯데자이언츠 관리자 페이지</h1>

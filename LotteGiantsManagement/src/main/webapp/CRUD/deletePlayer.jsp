@@ -16,7 +16,7 @@
 String driver = "oracle.jdbc.driver.OracleDriver";
 String url = "jdbc:oracle:thin:@localhost:1521:xe";
 Class.forName(driver);	// 오라클 연결
-Connection conn = DriverManager.getConnection(url, "manage", "rlaxogud");	// 오라클 접속
+Connection conn = DriverManager.getConnection(url, "manager", "rlaxogud");	// 오라클 접속
 String sql = "delete from player where bnum = ?";
 PreparedStatement pstmt = conn.prepareStatement(sql);
 pstmt.setString(1, request.getParameter("bnum"));
