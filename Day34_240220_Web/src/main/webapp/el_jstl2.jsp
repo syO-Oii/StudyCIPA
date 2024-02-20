@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%-- JSTL Core 실습 --%>
+<%-- Core이란 ? :  --%>
+
+
 <c:if test="true">
 무조건 실행함<br>
 </c:if>
@@ -27,6 +32,20 @@ bbb는 100보다 작습니다. <br>
 		num은 다른 값입니다.<br>
 	</c:otherwise>
 </c:choose>
+
+<%-- for문 예제 --%>
+${sum = 0; '' }
+<c:forEach var= "i" begin="1" end="100">
+${sum = sum + i; '' }
+</c:forEach>
+결과 : ${sum }<br>
+
+<%-- 문자열 자동 형변환 --%>
+${1+'10' } <br>
+${1+'10' + '102' } <br>
+${"1"+15 } <br>
+${'문자' += '열' } <br>
+${aaa += 10 } <br>
 
 </body>
 </html>
