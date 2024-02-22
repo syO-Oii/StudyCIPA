@@ -1,5 +1,9 @@
+<%@page import="dao.BoardDao"%>
+<%@page import="dto.Board"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +15,11 @@
     <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
     <script src="js/ie.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+<!--  <form action="FreeBoard.do" method = "post"> -->
+
 <header class = "top-bar">
         <div class="inner">
             <h1><a href="../index.html">Check Swing</a></h1>
@@ -62,7 +69,7 @@
                                 target = '_blank'>키움 히어로즈</a></li>
                     </ul>
                 </li>
-                <li><a href="FreeBoard/FreeBoardForm.jsp">자유게시판</a></li>  <!-- 게시판 --> 
+                <li><a href="FreeBoardForm.do">자유게시판</a></li>  <!-- 게시판 --> 
             </ul>
 
             <ul class="util">
@@ -73,6 +80,43 @@
             </ul>
         </div>
     </header>
+
+	<div class="container" style="padding-top: 50px;">
+		<table class="table table-bordered table-hover">
+    		<tr>
+        		<th class="num"    >번호    </th>
+        		<th class="title"  >제목    </th>
+        		<th class="writer" >작성자  </th>
+        		<th class="regtime">작성일시</th>
+        		<th                >조회수  </th>
+    		</tr>
+			<% 
+                    // 게시글 목록을 가져오는 부분
+                    List<Board> boardList = BoardDao.getInstance().getRecentPosts(10); // 적절한 DAO 메서드를 호출하여 게시글 목록을 가져오세요.
+
+                    // 가져온 게시글 목록을 순회하며 표에 추가하는 부분
+                    for (Board board : boardList) { 
+                %>
+                       
+        	<tr>
+            	<td><%= board.getNum() %></td>
+        		<td style="text-align:left;">
+            		<a href="view.do?num=<%= board.getNum() %>">
+                		<%= board.getTitle() %>
+            		</a>
+        		</td>
+        		<td><%= board.getWriter() %></td>
+        		<td><%= board.getRegtime() %></td>
+        		<td><%= board.getHits() %></td>
+        	</tr>
+			<% } %>
+		</table>
+		<br>
+		<input type="button" value="글쓰기" class="btn btn-primary" onclick="location.href='write.jsp'">
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+		
+
 
 
 	<footer>
@@ -98,5 +142,7 @@
             </div>
         </div>
     </footer>
+    
+    <!--  </form> -->
 </body>
 </html>

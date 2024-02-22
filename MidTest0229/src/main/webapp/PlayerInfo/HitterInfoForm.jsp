@@ -28,7 +28,7 @@
                 <li>
                     <a href="#">팀 정보 조회</a>
                     <ul>
-                        <li><a href="TeamInfo/LotteForm.jsp">롯데 자이언츠</a></li>
+                        <li><a href="../TeamInfo/LotteForm.jsp">롯데 자이언츠</a></li>
                         <li><a href="#">LG 트윈스</a></li>
                         <li><a href="#">KT 위즈</a></li>
                         <li><a href="#">NC 다이노스</a></li>

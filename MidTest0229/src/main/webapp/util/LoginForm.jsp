@@ -76,8 +76,16 @@
 
 	<!-- 테스트 페이지 -->
 
+	<figure>
+		<form action="login.do" method="post">
+		아이디 <input type="text" name="id" size="10">
+		암호(이메일) <input type="text" name="email">
+		<input type="submit" value="로그인">
+		</form>
+	</figure>
+	
 
-	<h1>로그인 화면</h1>
+</body>
 	
 	
 	<!-- 테스트 페이지 -->

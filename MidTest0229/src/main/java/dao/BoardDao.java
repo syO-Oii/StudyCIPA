@@ -22,7 +22,7 @@ public class BoardDao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(
-	        		"jdbc:mysql://localhost:3306/project1", "manager", "rlaxogud");
+	        		"jdbc:mysql://localhost:3306/project1", "root", "mysql");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -130,6 +130,25 @@ public class BoardDao {
 	        e.printStackTrace();
 	    } 
 		return 0;
+	}
+	
+	public ArrayList<Board> getRecentPosts(int count) {
+	    ArrayList<Board> list = new ArrayList<>();
+	    String sql = "SELECT * FROM board ORDER BY regtime DESC LIMIT ?";
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setInt(1, count);
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            Board board = new Board(rs.getInt("num"), rs.getString("writer"),
+	                    rs.getString("title"), rs.getString("content"),
+	                    rs.getString("regtime"), rs.getInt("hits"));
+	            list.add(board);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return list;
 	}
 	
 }

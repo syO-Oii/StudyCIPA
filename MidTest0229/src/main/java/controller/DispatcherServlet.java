@@ -56,7 +56,7 @@ public class DispatcherServlet extends HttpServlet {
 			// 포워딩 작업
 			request.setAttribute("list", list);
 			RequestDispatcher dispatcher
-			    = request.getRequestDispatcher("/WEB-INF/view/list.jsp");
+			    = request.getRequestDispatcher("../FreeBoard/list.jsp");
 			dispatcher.forward(request, response);
 		
 		// view
@@ -76,7 +76,7 @@ public class DispatcherServlet extends HttpServlet {
 			// 포워딩 작업
 			request.setAttribute("bd", board);
 			RequestDispatcher dispatcher
-			    = request.getRequestDispatcher("/WEB-INF/view/view.jsp");
+			    = request.getRequestDispatcher("../FreeBoard/view.jsp");
 			dispatcher.forward(request, response);
 		// login
 		} else if (path.equals("/login.do")) {
