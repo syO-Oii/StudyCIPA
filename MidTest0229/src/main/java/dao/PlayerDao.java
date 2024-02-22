@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 import dto.Board;
 
-public class StatDao {
+public class PlayerDao {
 	private static Connection conn;
-	private static StatDao dao = new StatDao();
-	private StatDao() {} // 생성자
-	public static StatDao getInstance() {
-		StatDao.getConnection();
+	private static PlayerDao dao = new PlayerDao();
+	private PlayerDao() {} // 생성자
+	public static PlayerDao getInstance() {
+		PlayerDao.getConnection();
 		return dao;
 	}
 	
