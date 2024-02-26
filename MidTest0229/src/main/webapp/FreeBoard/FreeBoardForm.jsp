@@ -75,8 +75,8 @@
             <ul class="util">
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Help</a></li>
-                <li><a href="#">Login</a></li>              <!-- 로그인 -->
-                <li><a href="#">Join</a></li>                <!-- 회원가입-->
+                <li><a href="../util/LoginForm.jsp">Login</a></li>              <!-- 로그인 -->
+                <li><a href="../util/JoinForm.jsp">Join</a></li>                <!-- 회원가입-->
             </ul>
         </div>
     </header>

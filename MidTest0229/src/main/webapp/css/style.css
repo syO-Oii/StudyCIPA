@@ -93,7 +93,6 @@ header .inner #gnb li ul li a{
 
 
 
-
 figure {
 	width: 100%;
 	height: calc(100vh - 120px); /*전체 브라우저 높이에서 120px만큼 빼줌*/

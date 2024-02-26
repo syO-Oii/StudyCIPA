@@ -75,18 +75,16 @@
     </header>
 
 	<!-- 테스트 페이지 -->
-
-	<figure>
-		<form action="login.do" method="post">
-		아이디 <input type="text" name="id" size="10">
-		암호(이메일) <input type="text" name="email">
-		<input type="submit" value="로그인">
-		</form>
-	</figure>
-	
-
-</body>
-	
+	<div class = "main">
+		<span>
+			<h1>로그인 페이지</h1>
+			<form action="login.do" method="post">
+			아이디 <input type="text" name="id" size="10"> <br/>
+			암호(이메일) <input type="text" name="email">	<br/>
+			<input type="submit" value="로그인">
+			</form>
+		</span>		
+	</div>
 	
 	<!-- 테스트 페이지 -->
 	
