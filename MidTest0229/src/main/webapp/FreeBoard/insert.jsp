@@ -36,5 +36,5 @@
     Board board = new Board(writer, title, content);
 
     dao.insert(board);
-    response.sendRedirect("FreeBoardForm.jsp");
+    response.sendRedirect("FreeBoard.checkSwing");
 %>     

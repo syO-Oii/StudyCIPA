@@ -37,7 +37,7 @@
 </table>
 
 <br>
-<input type="button" value="목록보기" onclick="location.href='FreeBoardForm.jsp'">
+<input type="button" value="목록보기" onclick="location.href='FreeBoard.checkSwing'">
 <input type="button" value="수정"
        onclick="location.href='write.jsp?num=${bd.num}'">
 <input type="button" value="삭제"

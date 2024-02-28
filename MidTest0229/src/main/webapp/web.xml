@@ -8,6 +8,6 @@
   
   <servlet-mapping>
   	<servlet-name>action</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>*.checkSwing</url-pattern>
   </servlet-mapping>
 </web-app>

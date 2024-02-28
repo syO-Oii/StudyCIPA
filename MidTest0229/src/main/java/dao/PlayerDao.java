@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 import dto.Board;
 
+
+/* 내용 전부 수정해야함 */
+
+
 public class PlayerDao {
 	private static Connection conn;
 	private static PlayerDao dao = new PlayerDao();

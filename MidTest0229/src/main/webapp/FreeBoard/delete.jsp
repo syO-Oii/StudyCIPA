@@ -13,5 +13,5 @@ BoardDao dao = BoardDao.getInstance();
 dao.delete(num);
 
 // 목록보기 화면으로 돌아감
-response.sendRedirect("FreeBoardForm.jsp");
+response.sendRedirect("FreeBoard.checkSwing");
 %>

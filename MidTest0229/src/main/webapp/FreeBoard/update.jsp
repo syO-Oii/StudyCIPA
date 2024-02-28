@@ -33,6 +33,6 @@
      dao.update(board);
      
      // 글 보기 화면으로 돌아감
-     response.sendRedirect("view.do?num=" + num);
+     response.sendRedirect("view.checkSwing?num=" + num);
  %>     
  
