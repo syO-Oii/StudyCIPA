@@ -1,13 +1,15 @@
+<%@page import="dto.Member"%>
 <%@page import="dto.Board"%>
 <%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.sql.*" %>
-
+<% Member member = (Member) session.getAttribute("member"); %>
 <%
+
+
     // 글 번호 값 얻기, 주어지지 않았으면 0으로 설정
-    //int num = Integer.parseInt(request.getParameter("num"));
     String tmp = request.getParameter("num");
     int num = (tmp != null && tmp.length() > 0) ? Integer.parseInt(tmp)
                                                 : 0;
@@ -28,8 +30,18 @@
         title   = board.getTitle();
         content = board.getContent();
 
-		// 글 수정 모드일 때는 저장 버튼을 누르면 UPDATE 실행
-		action  = "update.jsp?num=" + num;
+        // 현재 사용자와 글의 작성자를 비교하여 일치할 경우에만 수정 모드로 설정
+        if (member != null && writer.equals(member.getName())) {
+            action  = "update.jsp?num=" + num;
+        } else {
+%>
+        <script>
+        	alert('작성자만 글을 수정할 수 있습니다.');
+        	history.back(); // 이전 페이지로 돌아가기
+    	</script>
+<%
+            return; // 폼 렌더링을 방지하기 위해 더 이상의 처리를 중단합니다.
+        }
 
     }
 %>
@@ -57,7 +69,7 @@
         <tr>
             <th>작성자</th>
             <td><input type="text" name="writer" maxlength="20"
-                       value="<%=writer%>">
+                       value="<%=member.getName() %>" readonly>
             </td>
         </tr>
         <tr>

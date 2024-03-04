@@ -1,4 +1,20 @@
 @charset 'utf-8';
+
+@font-face {
+    font-family: 'Giants-Inline';
+    src: url('../fonts/Giants-Inline.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('../fonts/Giants-Bold.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Giants-Regular';
+    src: url('../fonts/Giants-Regular.ttf') format('opentype');
+}
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -29,7 +45,8 @@ header .inner h1 {
 	bottom: 15px;
 }
 header .inner h1 a {
-	font: bold 24px/1 "arial";
+	font-family: 'Giants-Bold', sans-serif;
+	font-size : 24px;
 	color: #444;
 }
 
@@ -43,7 +60,8 @@ header .inner .util li {
 }
 header .inner .util li a {
 	display: block;
-	font: 12px/1 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 12px;
 	color: #999;
 	padding: 0px 10px;
 }
@@ -62,7 +80,8 @@ header .inner #gnb li {
 }
 header .inner #gnb li a {
 	display: block; /*인라인 요소는 block설정하여 크기를 조절가능*/
-	font: bold 15px/1 "arial";
+	font-family: 'Giants-Bold', sans-serif;
+	font-size: 15px/1 ;
 	color: #555;
 	padding: 20px 40px;
 	transition: all 0.5s;
@@ -88,7 +107,8 @@ header .inner ul > li > ul {
 }
 
 header .inner #gnb li ul li a{
-	font: bold 13px "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 13px ;
 }
 
 /* Main Styles */
@@ -139,6 +159,66 @@ header .inner #gnb li ul li a{
     background-color: #45a049;
 }
 
+
+/* Join 페이지 */
+
+.joinMain {
+    background-color: #f4f4f4; /* 배경색 설정 */
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 70%;
+    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+}
+
+.joinMain h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+
+.joinDiv {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 폼 스타일 */
+.joinDiv form {
+    display: flex;
+    flex-direction: column;
+}
+
+.joinDiv label {
+    margin-bottom: 8px;
+}
+
+.joinDiv input {
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.joinDiv button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.joinDiv button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
 figure {
 	width: 100%;
 	height: calc(100vh - 120px); /*전체 브라우저 높이에서 120px만큼 빼줌*/
@@ -163,12 +243,14 @@ figure .inner {
 	position: relative;
 }
 figure .inner h1 {
-	font: normal 100px/1 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 100px/1 ;
 	color: #fff;
 	margin-bottom: 20px;
 }
 figure .inner p {
-	font: 16px/1.4 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 16px/1.4 ;
 	color: #888;
 	margin-bottom: 60px;
 }
@@ -177,7 +259,8 @@ figure .inner a {
 	width: 400px;
 	height: 30px;
 	border: 1px solid #bbb;
-	font: bold 11px/30px "arial";
+	font-family: 'Giants-Bold', sans-serif;
+	font-size: 11px/30px ;
 	color: #fff;
 	text-align: center;
 	letter-spacing: 1px;
@@ -197,7 +280,8 @@ section .inner {
 	margin: 0px auto;
 }
 section .inner h1 {
-	font: bold 24px/1 "arial";
+	font-family: Giants-Bold, sans-serif;
+	font-size: 24px/1 ;
 	color: #555;
 	text-align: center;
 	margin-bottom: 50px;
@@ -224,11 +308,13 @@ section .inner .wrap article h2 {
 	margin-bottom: 10px;
 }
 section .inner .wrap article h2 a {
-	font: bold 16px/1 "arial";
+	font-family: 'Giants-Bold', sans-serif;
+	font-size: 12px/1 ;
 	color: #555;
 }
 section .inner .wrap article p {
-	font: 14px/1.4 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 12px/1.4 ;
 	color: #777;
 }
 section .inner .wrap article .pic {
@@ -268,7 +354,8 @@ footer .inner .upper::after {
 }
 footer .inner .upper h1 {
 	float: left;
-	font: bold 24px/1 "arial";
+	font-family: 'Giants-Bold', sans-serif;
+	font-size: 24px/1;
 	color: #666;
 }
 footer .inner .upper ul {
@@ -279,7 +366,8 @@ footer .inner .upper ul li {
 	margin-left: 20px;
 }
 footer .inner .upper ul li a {
-	font: bold 14px/1 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 14px/1;
 	color: #666;
 }
 footer .inner .lower {
@@ -288,13 +376,15 @@ footer .inner .lower {
 }
 footer .inner .lower address {
 	width: 100%;
-	font: 12px/1.3 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 12px/1.3 ;
 	color: #777;
 	margin-bottom: 20px;
 }
 footer .inner .lower p {
 	width: 100%;
-	font: 12px/1 "arial";
+	font-family: 'Giants-Regular', sans-serif;
+	font-size: 12px/1;
 	color: #777;
 }
 

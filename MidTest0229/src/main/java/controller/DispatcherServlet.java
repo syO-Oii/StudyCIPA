@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,10 +63,10 @@ public class DispatcherServlet extends HttpServlet {
 		    // 로그인 여부 확인
 			if (member == null) {
 		        // 팝업 메시지를 띄우는 JavaScript 코드 생성
-				String popupScript = "<script>alert('로그인이 필요합니다.');"
+				String boardPopupScript = "<script>alert('로그인이 필요합니다.');"
                         + "window.location.href='" + contextPath + "/login.checkSwing';</script>";
 				response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().println(popupScript);
+                response.getWriter().println(boardPopupScript);
 		        return; // 로그인 페이지로 이동했으므로 더 이상 진행하지 않도록 메서드 종료
 		    }			
 			response.sendRedirect(contextPath + "/FreeBoard/FreeBoardForm.jsp");
@@ -88,24 +89,45 @@ public class DispatcherServlet extends HttpServlet {
 			RequestDispatcher dispatcher
 			    = request.getRequestDispatcher("../FreeBoard/view.jsp");
 			dispatcher.forward(request, response);
-			
-			
 		} else if (path.equals("/login.checkSwing")) {					// Util - Login 눌렀을 때
 			response.sendRedirect(contextPath + "/util/LoginForm.jsp");
 		} else if (path.equals("/join.checkSwing")) {					// Util - Join 눌렀을 때
 			response.sendRedirect(contextPath + "/util/JoinForm.jsp");
+		} else if (path.equals("/changeInfo.checkSwing")) {					// Util - Join 눌렀을 때
+			response.sendRedirect(contextPath + "/util/changeInfoForm.jsp");
+		} else if (path.equals("/memberUpdate.checkSwing")) {					// Util - Join 눌렀을 때
+			response.sendRedirect(contextPath + "/util/memberUpdate.jsp");
 		} else if (path.equals("/checkLogin.checkSwing")) {						// 로그인 체크
 			String id = request.getParameter("id");
 			String email = request.getParameter("email");
+			String ck = request.getParameter("ckMemory");
+			
+			if (ck != null && ck.equals("on")) { // 체크가 켜졌을 때
+			    // 쿠키에 사용자 정보 저장
+				Cookie idCookie = new Cookie("rememberedId", id);
+		        idCookie.setMaxAge(60); // 쿠키의 유효 기간 설정 (초 단위)
+		        response.addCookie(idCookie);
+			} else { // 체크가 꺼졌을 때
+			    // 기존 쿠키 삭제
+				Cookie idCookie = new Cookie("rememberedId", "");
+			    idCookie.setMaxAge(0); // 쿠키 삭제
+			    response.addCookie(idCookie);
+			}
+
 			Member member 
 			     = MemberDao.getInstance().selectForLogin(id, email);
 			if (member != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("member", member);
-				response.sendRedirect("../index.jsp");
+				response.sendRedirect("main.checkSwing");
 			} else {
-				response.sendRedirect("loginForm.jsp");
+				String checkLoginPopupScript = "<script>alert('아이디 혹은 이메일 정보를 확인해주세요.');"
+                        + "window.location.href='" + contextPath + "/login.checkSwing';</script>";
+				response.setContentType("text/html;charset=UTF-8");
+				response.getWriter().println(checkLoginPopupScript);
+				// 로그인 실패 시 메시지를 설정
 			}
+			
 		} else if (path.equals("/logout.checkSwing")) {
 			HttpSession session = request.getSession(false);
 			session.invalidate();

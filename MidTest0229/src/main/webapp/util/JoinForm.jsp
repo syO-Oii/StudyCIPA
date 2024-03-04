@@ -8,9 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Swing 회원가입</title>
     <link rel="icon" href="/img/logo.jpeg" type="image/x-icon">
-    <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="js/ie.js"></script>
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+	
+	
 </head>
 <body>
 <header class = "top-bar">
@@ -71,24 +76,52 @@
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
             <% if (session.getAttribute("member") == null) { %>
-        	<!-- 로그인 상태가 아닌 경우 -->
-        	<li><a href="login.checkSwing">Login</a></li>
+        		<!-- 로그인 상태가 아닌 경우 -->
+        		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
-        	<!-- 로그인 상태인 경우 -->
-        	<li><a href="logout.checkSwing">Logout</a></li>
+        		<!-- 로그인 상태인 경우 -->
+        		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
-            <li><a href="join.checkSwing">Join</a></li>                <!-- 회원가입-->
+    		
+    		<% if (session.getAttribute("member") == null) { %>
+        		<!-- Join : 로그인 상태가 아닌 경우 -->
+        		<li><a href="join.checkSwing">Join</a></li>
+    		<% } else { %>
+        		<!-- 정보수정 : 로그인 상태인 경우 -->
+        		<li><a href="changeInfo.checkSwing">정보수정</a></li>
+    		<% } %>
+    		   		
         </ul>
     </div>
 </header>
-
-	<!-- 테스트 페이지 -->
-
-
-	<h1>회원가입 화면</h1>
+	<main class = "joinMain">
+		<div class="joinDiv" style="padding-top: 50px">
+		<form action="memberInput.jsp" method="post">
+			<span>
+			<h1>회원 가입 페이지</h1>
+			<div>
+				<label for="idInput" class="form-label">아이디</label>
+				<input type="text" name="id" class="form-control" id="idInput" placeholder="아이디">
+			</div>
+			<div>
+				<label for="exampleFormControlInput1" class="form-label">이메일</label>
+				<input type="email" name="email" class="form-control"
+					id="exampleFormControlInput1" placeholder="name@example.com">
+			</div>
+			<div>
+				<label for="nameInput" class="form-label">이름</label>
+				<input type="text" name="name" class="form-control" id="nameInput" placeholder="이름">
+			</div>
+			<button class="btn btn-primary">등록</button>
+			</span>
+		</form>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"></script>
+	</main>
 	
-	
-	<!-- 테스트 페이지 -->
 	
 	<footer>
         <div class="inner">

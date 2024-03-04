@@ -96,8 +96,8 @@ public class BoardDao {
 	    ) {
 	        // 현재 시간 얻기
 //	        String curTime = LocalDate.now() + " " + 
-//	                         LocalTime.now().toString().substring(0, 8);
-	        
+//	                         LocalTime.now().toString().substring(0, 8);   	
+	    	
 	        // 쿼리 실행
 	    	pstmt.setString(1, board.getWriter());
 	    	pstmt.setString(2, board.getTitle());

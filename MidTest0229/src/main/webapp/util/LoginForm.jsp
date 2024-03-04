@@ -13,6 +13,8 @@
     <script src="js/ie.js"></script>
 </head>
 <body>
+	
+
 <header class = "top-bar">
 	<div class="inner">
     	<h1><a href="main.checkSwing">Check Swing</a></h1>
@@ -71,29 +73,70 @@
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
             <% if (session.getAttribute("member") == null) { %>
-        	<!-- 로그인 상태가 아닌 경우 -->
-        	<li><a href="login.checkSwing">Login</a></li>
+        		<!-- 로그인 상태가 아닌 경우 -->
+        		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
-        	<!-- 로그인 상태인 경우 -->
-        	<li><a href="logout.checkSwing">Logout</a></li>
+        		<!-- 로그인 상태인 경우 -->
+        		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
-            <li><a href="join.checkSwing">Join</a></li>                <!-- 회원가입-->
+    		
+    		<% if (session.getAttribute("member") == null) { %>
+        		<!-- Join : 로그인 상태가 아닌 경우 -->
+        		<li><a href="join.checkSwing">Join</a></li>
+    		<% } else { %>
+        		<!-- 정보수정 : 로그인 상태인 경우 -->
+        		<li><a href="changeInfo.checkSwing">정보수정</a></li>
+    		<% } %>
+    		   		
         </ul>
     </div>
 </header>
 
 	<main class = "loginMain">
 		<div class = "loginDiv">
+			<!-- 로그인 실패 메시지 출력 -->
+            <% String loginFailedMessage = (String)request.getAttribute("loginFailedMessage"); %>
+			<% if (loginFailedMessage != null && !loginFailedMessage.isEmpty()) { %>
+    		<div class="alert alert-danger">
+        		<%= loginFailedMessage %>
+        		<script>
+            		// 로그인 실패 시 팝업 창 띄우기
+            		alert('로그인이 필요합니다.');
+            		window.location.href='<%= request.getContextPath() %>/login.checkSwing';
+        		</script>
+    		</div>
+			<% } %>
+			
+			<%
+				String rememberedId = "";
+				boolean rememberMeChecked = false;
+				Cookie[] cookies = request.getCookies();
+
+				if (cookies != null) {
+	                for (Cookie cookie : cookies) {
+	                    if (cookie.getName().equals("rememberedId")) {
+	                    	rememberedId = cookie.getValue();
+	                        rememberMeChecked = true;
+	                        break;
+	                    }
+	                }
+	            }
+				
+			%>
+		
 			<form action="checkLogin.checkSwing" method="post">
 				<span>
 					<h1>로그인 페이지</h1><br/>
-					<h4>아이디</h4> <input type="text" name="id" size="10"> <br/><br/>
-					<h4>암호(이메일)</h4> <input type="text" name="email">	<br/>
+					<h4>아이디</h4> <input type="text" name="id" size="10" value = "<%=rememberedId %>"> <br/><br/>
+					<h4>암호(이메일)</h4> <input type="text" name="email">	기억하기:<input type="checkbox" checked name="ckMemory" <%= rememberMeChecked ? "checked" : "" %> /> <br/>
 					<input type="submit" value="로그인">
+					
 				</span>
 			</form>		
 		</div>
 	</main>
+	
+	
 	<!-- 테스트 페이지 -->
 	
 	<footer>
