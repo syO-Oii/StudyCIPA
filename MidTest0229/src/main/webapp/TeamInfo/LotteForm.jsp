@@ -70,14 +70,22 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
-        	<!-- 로그인 상태가 아닌 경우 -->
-        	<li><a href="login.checkSwing">Login</a></li>
+            <% if (session.getAttribute("manager") == null) { %>
+        		<!-- 로그인 상태가 아닌 경우 -->
+        		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
-        	<!-- 로그인 상태인 경우 -->
-        	<li><a href="logout.checkSwing">Logout</a></li>
+        		<!-- 로그인 상태인 경우 -->
+        		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
-            <li><a href="join.checkSwing">Join</a></li>                <!-- 회원가입-->
+    		
+    		<% if (session.getAttribute("manager") == null) { %>
+        		<!-- Join : 로그인 상태가 아닌 경우 -->
+        		<li><a href="join.checkSwing">Join</a></li>
+    		<% } else { %>
+        		<!-- 정보수정 : 로그인 상태인 경우 -->
+        		<li><a href="changeInfo.checkSwing">정보수정</a></li>
+    		<% } %>
+    		   		
         </ul>
     </div>
 </header>

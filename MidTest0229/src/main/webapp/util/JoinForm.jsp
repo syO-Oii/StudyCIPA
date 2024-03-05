@@ -75,7 +75,7 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
+            <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
         		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
@@ -83,7 +83,7 @@
         		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
     		
-    		<% if (session.getAttribute("member") == null) { %>
+    		<% if (session.getAttribute("manager") == null) { %>
         		<!-- Join : 로그인 상태가 아닌 경우 -->
         		<li><a href="join.checkSwing">Join</a></li>
     		<% } else { %>
@@ -96,7 +96,7 @@
 </header>
 	<main class = "joinMain">
 		<div class="joinDiv" style="padding-top: 50px">
-		<form action="memberInput.jsp" method="post">
+		<form action="managerInput.jsp" method="post">
 			<span>
 			<h1>회원 가입 페이지</h1>
 			<div>
@@ -104,9 +104,9 @@
 				<input type="text" name="id" class="form-control" id="idInput" placeholder="아이디">
 			</div>
 			<div>
-				<label for="exampleFormControlInput1" class="form-label">이메일</label>
-				<input type="email" name="email" class="form-control"
-					id="exampleFormControlInput1" placeholder="name@example.com">
+				<label for="exampleFormControlInput1" class="form-label">비밀번호</label>
+				<input type="password" name="password" class="form-control"
+					id="exampleFormControlInput1" placeholder="비밀번호">
 			</div>
 			<div>
 				<label for="nameInput" class="form-label">이름</label>

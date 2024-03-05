@@ -34,5 +34,10 @@
      
      // 글 보기 화면으로 돌아감
      response.sendRedirect("view.checkSwing?num=" + num);
- %>     
+     
+ %>
+ <script>
+    alert('글이 성공적으로 수정되었습니다.');
+    location.href = "view.checkSwing?num=<%= num %>";
+</script>     
  

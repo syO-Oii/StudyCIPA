@@ -7,15 +7,16 @@ public class Board {
 	private String content;
 	private String regtime;
 	private int hits;
+	private int managerno;
 	
 	public Board(String writer, String title, String content) {
-		this(0, writer, title, content, "", 0);
+		this(8, writer, title, content, "", 0);
 	}
 
 	public Board(int num, String writer, String title, String content) {
 		this(num, writer, title, content, "", 0);
 	}
-	
+
 	public Board(int num, String writer, String title, String content, String regtime, int hits) {
 		this.num = num;
 		this.writer = writer;
@@ -23,6 +24,18 @@ public class Board {
 		this.content = content;
 		this.regtime = regtime;
 		this.hits = hits;
+	}
+	
+	
+	public Board(int num, String writer, String title, String content, String regtime, int hits, int managerno) {
+		super();
+		this.num = num;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.regtime = regtime;
+		this.hits = hits;
+		this.managerno = managerno;
 	}
 
 	public int getNum() {
@@ -73,11 +86,21 @@ public class Board {
 		this.hits = hits;
 	}
 
+	public int getManagerno() {
+		return managerno;
+	}
+
+	public void setManagerno(int managerno) {
+		this.managerno = managerno;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [num=" + num + ", writer=" + writer + ", title=" + title + ", content=" + content + ", regtime="
-				+ regtime + ", hits=" + hits + "]";
+				+ regtime + ", hits=" + hits + ", managerno=" + managerno + "]";
 	}
+	
+	
 	
 	
 	

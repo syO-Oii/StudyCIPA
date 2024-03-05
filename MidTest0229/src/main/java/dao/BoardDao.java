@@ -13,16 +13,19 @@ public class BoardDao {
 	private static Connection conn;
 	private static BoardDao dao = new BoardDao();
 	private BoardDao() {} // 생성자
+	
 	public static BoardDao getInstance() {
-		BoardDao.getConnection();
-		return dao;
+		if (conn == null) {
+	        getConnection();
+	    }
+	    return dao;
 	}
 	
 	private static void getConnection() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(
-	        		"jdbc:mysql://localhost:3306/project1", "root", "mysql");
+	        		"jdbc:oracle:thin:@localhost:1521:xe",  "manager", "rlaxogud");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -90,20 +93,17 @@ public class BoardDao {
 	}
 	
 	public int insert(Board board) {
-		String sql = "insert into board(writer, title, content, regtime, hits) values (?,?,?,now(),0)";
+		String sql = "insert into board(num, writer, title, content, regtime, hits) "
+				   + "values (board_seq.NEXTVAL, ?, ?, ?, TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'),0)";
 	    try ( 
 	        PreparedStatement pstmt = conn.prepareStatement(sql);            
 	    ) {
-	        // 현재 시간 얻기
-//	        String curTime = LocalDate.now() + " " + 
-//	                         LocalTime.now().toString().substring(0, 8);   	
-	    	
 	        // 쿼리 실행
 	    	pstmt.setString(1, board.getWriter());
 	    	pstmt.setString(2, board.getTitle());
 	    	pstmt.setString(3, board.getContent());
 	        return pstmt.executeUpdate();
-	    
+	       	        
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	    } 
@@ -111,7 +111,7 @@ public class BoardDao {
 	}
 	
 	public int update(Board board) {
-        String sql = "update board set writer=?, title=?, content=?, regtime=now() where num=?";
+        String sql = "update board set writer=?, title=?, content=?, regtime=TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS') where num=?";
 	    try ( 
 	        PreparedStatement pstmt = conn.prepareStatement(sql);            
 	    ) {
@@ -134,7 +134,7 @@ public class BoardDao {
 	
 	public ArrayList<Board> getRecentPosts(int count) {
 	    ArrayList<Board> list = new ArrayList<>();
-	    String sql = "SELECT * FROM board ORDER BY regtime DESC LIMIT ?";
+	    String sql = "SELECT * FROM (SELECT * FROM board ORDER BY regtime DESC) WHERE NUM <= ?";
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setInt(1, count);
 	        ResultSet rs = pstmt.executeQuery();

@@ -70,7 +70,7 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
+            <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
         		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
@@ -78,7 +78,7 @@
         		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
     		
-    		<% if (session.getAttribute("member") == null) { %>
+    		<% if (session.getAttribute("manager") == null) { %>
         		<!-- Join : 로그인 상태가 아닌 경우 -->
         		<li><a href="join.checkSwing">Join</a></li>
     		<% } else { %>

@@ -75,7 +75,7 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
+            <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
         		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
@@ -83,7 +83,7 @@
         		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
     		
-    		<% if (session.getAttribute("member") == null) { %>
+    		<% if (session.getAttribute("manager") == null) { %>
         		<!-- Join : 로그인 상태가 아닌 경우 -->
         		<li><a href="join.checkSwing">Join</a></li>
     		<% } else { %>
@@ -105,12 +105,12 @@
         		<th                >조회수  </th>
     		</tr>
 			<% 
-                    // 게시글 목록을 가져오는 부분
-                    List<Board> boardList = BoardDao.getInstance().getRecentPosts(10);
+                // 게시글 목록을 가져오는 부분
+                List<Board> boardList = BoardDao.getInstance().getRecentPosts(20);
 
-                    // 가져온 게시글 목록을 순회하며 표에 추가하는 부분
-                    for (Board board : boardList) { 
-                %>
+                // 가져온 게시글 목록을 순회하며 표에 추가하는 부분
+                for (Board board : boardList) { 
+            %>
                        
         	<tr>
             	<td><%= board.getNum() %></td>

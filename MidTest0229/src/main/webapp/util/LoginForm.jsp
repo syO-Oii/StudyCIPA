@@ -72,7 +72,7 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
+            <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
         		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
@@ -80,7 +80,7 @@
         		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
     		
-    		<% if (session.getAttribute("member") == null) { %>
+    		<% if (session.getAttribute("manager") == null) { %>
         		<!-- Join : 로그인 상태가 아닌 경우 -->
         		<li><a href="join.checkSwing">Join</a></li>
     		<% } else { %>
@@ -128,7 +128,7 @@
 				<span>
 					<h1>로그인 페이지</h1><br/>
 					<h4>아이디</h4> <input type="text" name="id" size="10" value = "<%=rememberedId %>"> <br/><br/>
-					<h4>암호(이메일)</h4> <input type="text" name="email">	기억하기:<input type="checkbox" checked name="ckMemory" <%= rememberMeChecked ? "checked" : "" %> /> <br/>
+					<h4>암호</h4> <input type="password" name="password">	기억하기:<input type="checkbox" checked name="ckMemory" <%= rememberMeChecked ? "checked" : "" %> /> <br/>
 					<input type="submit" value="로그인">
 					
 				</span>

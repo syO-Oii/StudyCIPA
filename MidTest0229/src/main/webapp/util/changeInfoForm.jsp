@@ -1,4 +1,4 @@
-<%@page import="dto.Member"%>
+<%@page import="dto.Manager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +15,9 @@
 	rel="stylesheet"
 	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
 	crossorigin="anonymous">
-	<% Member member = (Member) session.getAttribute("member"); %>
+	<%
+	 Manager manager = (Manager) session.getAttribute("manager");
+	%>
 	
 	
 </head>
@@ -77,7 +79,7 @@
         <ul class="util">
             <li><a href="#">Contact</a></li>
             <li><a href="#">Help</a></li>
-            <% if (session.getAttribute("member") == null) { %>
+            <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
         		<li><a href="login.checkSwing">Login</a></li>
     		<% } else { %>
@@ -85,7 +87,7 @@
         		<li><a href="logout.checkSwing">Logout</a></li>
     		<% } %>
     		
-    		<% if (session.getAttribute("member") == null) { %>
+    		<% if (session.getAttribute("manager") == null) { %>
         		<!-- Join : 로그인 상태가 아닌 경우 -->
         		<li><a href="join.checkSwing">Join</a></li>
     		<% } else { %>
@@ -98,25 +100,25 @@
 </header>
 	<main class = "joinMain">
 		<div class="joinDiv" style="padding-top: 50px">
-		<form action="memberUpdate.jsp" method="post">
+		<form action="managerUpdate.jsp" method="post">
 			<span>
 			<h1>회원정보 수정</h1>
 			<div>
 				<label for="displayId" class="form-label">아이디</label>
 				<!-- 아이디(hidden) -->
-    			<input type="hidden" name="hiddenId" id = "hiddenId" value="<%= member.getId() %>">	
+    			<input type="hidden" name="hiddenId" id = "hiddenId" value="<%= manager.getId() %>">	
 				<!-- 사용자에게 표시되는 읽기 전용 필드 -->
-    			<input type="text" name="idInput" class="form-control" id="idInput" placeholder="아이디" value="<%= member.getId() %>" readonly>
+    			<input type="text" name="idInput" class="form-control" id="idInput" placeholder="아이디" value="<%= manager.getId() %>" readonly>
 
 			</div>
 			<div>
-				<label for="exampleFormControlInput1" class="form-label">이메일</label>
-				<input type="email" name="emailInput" class="form-control"
-					id="exampleFormControlInput1" placeholder="name@example.com" value="<%= member.getEmail() %>">
+				<label for="exampleFormControlInput1" class="form-label">비밀번호</label>
+				<input type="password" name="passwordInput" class="form-control"
+					id="exampleFormControlInput1" value="<%= manager.getPassword() %>">
 			</div>
 			<div>
 				<label for="nameInput" class="form-label">이름</label>
-				<input type="text" name="nameInput" class="form-control" id="nameInput" placeholder="이름" value="<%= member.getName() %>">
+				<input type="text" name="nameInput" class="form-control" id="nameInput" placeholder="이름" value="<%= manager.getName() %>">
 			</div>
 			<button class="btn btn-primary">등록</button>
 			</span>

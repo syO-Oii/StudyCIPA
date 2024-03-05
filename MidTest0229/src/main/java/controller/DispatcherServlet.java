@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BoardDao;
-import dao.MemberDao;
+import dao.ManagerDao;
 import dto.Board;
-import dto.Member;
+import dto.Manager;
 
 /**
  * Servlet implementation class DispatcherServlet
@@ -59,9 +59,9 @@ public class DispatcherServlet extends HttpServlet {
 			response.sendRedirect(contextPath + "/TeamInfo/LotteForm.jsp");
 		} else if (path.equals("/FreeBoard.checkSwing")) {					// 자유게시판
 			HttpSession session = request.getSession();
-		    Member member = (Member) session.getAttribute("member");
+		    Manager manager = (Manager) session.getAttribute("manager");
 		    // 로그인 여부 확인
-			if (member == null) {
+			if (manager == null) {
 		        // 팝업 메시지를 띄우는 JavaScript 코드 생성
 				String boardPopupScript = "<script>alert('로그인이 필요합니다.');"
                         + "window.location.href='" + contextPath + "/login.checkSwing';</script>";
@@ -95,30 +95,30 @@ public class DispatcherServlet extends HttpServlet {
 			response.sendRedirect(contextPath + "/util/JoinForm.jsp");
 		} else if (path.equals("/changeInfo.checkSwing")) {					// Util - Join 눌렀을 때
 			response.sendRedirect(contextPath + "/util/changeInfoForm.jsp");
-		} else if (path.equals("/memberUpdate.checkSwing")) {					// Util - Join 눌렀을 때
-			response.sendRedirect(contextPath + "/util/memberUpdate.jsp");
+		} else if (path.equals("/managerUpdate.checkSwing")) {					// Util - Join 눌렀을 때
+			response.sendRedirect(contextPath + "/util/managerUpdate.jsp");
 		} else if (path.equals("/checkLogin.checkSwing")) {						// 로그인 체크
 			String id = request.getParameter("id");
-			String email = request.getParameter("email");
+			String password = request.getParameter("password");
 			String ck = request.getParameter("ckMemory");
 			
 			if (ck != null && ck.equals("on")) { // 체크가 켜졌을 때
 			    // 쿠키에 사용자 정보 저장
-				Cookie idCookie = new Cookie("rememberedId", id);
+				Cookie idCookie = new Cookie("remanageredId", id);
 		        idCookie.setMaxAge(60); // 쿠키의 유효 기간 설정 (초 단위)
 		        response.addCookie(idCookie);
 			} else { // 체크가 꺼졌을 때
 			    // 기존 쿠키 삭제
-				Cookie idCookie = new Cookie("rememberedId", "");
+				Cookie idCookie = new Cookie("remanageredId", "");
 			    idCookie.setMaxAge(0); // 쿠키 삭제
 			    response.addCookie(idCookie);
 			}
 
-			Member member 
-			     = MemberDao.getInstance().selectForLogin(id, email);
-			if (member != null) {
+			Manager manager 
+			     = ManagerDao.getInstance().selectForLogin(id, password);
+			if (manager != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("member", member);
+				session.setAttribute("manager", manager);
 				response.sendRedirect("main.checkSwing");
 			} else {
 				String checkLoginPopupScript = "<script>alert('아이디 혹은 이메일 정보를 확인해주세요.');"
