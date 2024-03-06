@@ -39,6 +39,7 @@ header .inner {
 	margin: 0px auto;
 	position: relative; /*자식 absolute 요소의 기준점 설정*/
 }
+
 header .inner h1 {
 	position: absolute;
 	left: 0px;

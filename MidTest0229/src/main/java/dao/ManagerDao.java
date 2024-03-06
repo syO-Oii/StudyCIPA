@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dto.Manager;
@@ -13,11 +14,12 @@ public class ManagerDao {
 	private static Connection conn;
 	private static ManagerDao dao = new ManagerDao();
 	private ManagerDao() {} // 생성자
+	
 	public static ManagerDao getInstance() {
 		ManagerDao.getConnection();
 		return dao;
 	}
-	
+		
 	private static void getConnection() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -53,6 +55,33 @@ public class ManagerDao {
 		return manager;
 		
 	}
+	
+	public Manager selectManager(int num, boolean inc) {
+		Manager manager = null;
+		String sql = "select * from manager where num = ?";
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				manager = new Manager(rs.getInt("num"), 
+						  rs.getString("name"), 
+						  rs.getString("job"), 
+						  rs.getString("id"), 
+						  rs.getString("password"));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return manager;
+		
+	}
+	
+	
 	
 	public Manager select(String id) {
 		Manager manager = null;
@@ -139,5 +168,26 @@ public class ManagerDao {
 			e.printStackTrace();
 		}
 		return map;
+	}
+	
+	public ArrayList<Manager> getManagerList() {
+	    ArrayList<Manager> list = new ArrayList<>();
+	    String sql = "SELECT * FROM (SELECT * FROM manager ORDER BY num ASC)";
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	        	Manager manager = new Manager(rs.getInt("num"), 
+	        								 rs.getString("name"),
+	        								 rs.getString("job"),
+	        								 rs.getString("id"),
+	        								 rs.getString("password"));
+	        	
+	            list.add(manager);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return list;
 	}
 }

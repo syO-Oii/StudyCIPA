@@ -22,6 +22,11 @@
 <body>
 <header class = "top-bar">
 	<div class="inner">
+		<!-- <div class = "logoContainer">
+			<img alt="mainLogo" src="img/logo.jpeg"
+			 width = "120px" height = "120px">
+		</div> -->
+		
     	<h1><a href="main.checkSwing">Check Swing</a></h1>
         <ul id="gnb">
             <li>
@@ -177,7 +182,7 @@ KBO는 4일 CJ ENM과 2024~2026년까지 3년 동안 KBO리그 유무선 중계�
                     TEL : 031-111-1234 C.P : 010-1234-5678
                 </address>
                 <p>
-                    2020 CheckSwing &copy; copyright all right reserved.
+                    2024 CheckSwing &copy; copyright all right reserved.
                 </p>
             </div>
         </div>

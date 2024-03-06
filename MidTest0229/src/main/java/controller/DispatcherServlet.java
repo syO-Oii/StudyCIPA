@@ -42,6 +42,9 @@ public class DispatcherServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		process(request, response);
 	}
 	
@@ -93,9 +96,9 @@ public class DispatcherServlet extends HttpServlet {
 			response.sendRedirect(contextPath + "/util/LoginForm.jsp");
 		} else if (path.equals("/join.checkSwing")) {					// Util - Join 눌렀을 때
 			response.sendRedirect(contextPath + "/util/JoinForm.jsp");
-		} else if (path.equals("/changeInfo.checkSwing")) {					// Util - Join 눌렀을 때
+		} else if (path.equals("/changeInfo.checkSwing")) {					// Util - 정보변경 눌렀을 때
 			response.sendRedirect(contextPath + "/util/changeInfoForm.jsp");
-		} else if (path.equals("/managerUpdate.checkSwing")) {					// Util - Join 눌렀을 때
+		} else if (path.equals("/managerUpdate.checkSwing")) {					// Util - 정보변경 확인
 			response.sendRedirect(contextPath + "/util/managerUpdate.jsp");
 		} else if (path.equals("/checkLogin.checkSwing")) {						// 로그인 체크
 			String id = request.getParameter("id");
@@ -104,12 +107,12 @@ public class DispatcherServlet extends HttpServlet {
 			
 			if (ck != null && ck.equals("on")) { // 체크가 켜졌을 때
 			    // 쿠키에 사용자 정보 저장
-				Cookie idCookie = new Cookie("remanageredId", id);
+				Cookie idCookie = new Cookie("rememberedId", id);
 		        idCookie.setMaxAge(60); // 쿠키의 유효 기간 설정 (초 단위)
 		        response.addCookie(idCookie);
 			} else { // 체크가 꺼졌을 때
 			    // 기존 쿠키 삭제
-				Cookie idCookie = new Cookie("remanageredId", "");
+				Cookie idCookie = new Cookie("rememberedId", "");
 			    idCookie.setMaxAge(0); // 쿠키 삭제
 			    response.addCookie(idCookie);
 			}
@@ -132,7 +135,23 @@ public class DispatcherServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			session.invalidate();
 			response.sendRedirect(contextPath + "/index.jsp");	
-		} 
+			
+		} else if (path.equals("/admin.checkSwing")) {						// 자유게시판 - view
+			response.sendRedirect(contextPath + "/administrator/adminForm.jsp");
+		}
+		
+		
+		else if (path.equals("/updateMgrPopup.checkSwing")) {
+			int num = Integer.parseInt(request.getParameter("num"));
+			ManagerDao dao = ManagerDao.getInstance();
+			Manager manager = dao.selectManager(num, true);
+			
+			
+			request.setAttribute("updateManager", manager);
+			RequestDispatcher dispatcher
+			    = request.getRequestDispatcher("../administrator/updateAdminForm.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

@@ -109,7 +109,7 @@
                     TEL : 031-111-1234 C.P : 010-1234-5678
                 </address>
                 <p>
-                    2020 CheckSwing &copy; copyright all right reserved.
+                    2024 CheckSwing &copy; copyright all right reserved.
                 </p>
             </div>
         </div>

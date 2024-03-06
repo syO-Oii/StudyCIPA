@@ -110,8 +110,8 @@
 			<%
 				String rememberedId = "";
 				boolean rememberMeChecked = false;
+				
 				Cookie[] cookies = request.getCookies();
-
 				if (cookies != null) {
 	                for (Cookie cookie : cookies) {
 	                    if (cookie.getName().equals("rememberedId")) {
@@ -128,7 +128,8 @@
 				<span>
 					<h1>로그인 페이지</h1><br/>
 					<h4>아이디</h4> <input type="text" name="id" size="10" value = "<%=rememberedId %>"> <br/><br/>
-					<h4>암호</h4> <input type="password" name="password">	기억하기:<input type="checkbox" checked name="ckMemory" <%= rememberMeChecked ? "checked" : "" %> /> <br/>
+					<h4>암호</h4> <input type="password" name="password">	
+					기억하기:<input type="checkbox" checked name="ckMemory" <%= rememberMeChecked ? "checked" : "" %> /> <br/>
 					<input type="submit" value="로그인">
 					
 				</span>
@@ -157,7 +158,7 @@
                     TEL : 031-111-1234 C.P : 010-1234-5678
                 </address>
                 <p>
-                    2020 CheckSwing &copy; copyright all right reserved.
+                    2024 CheckSwing &copy; copyright all right reserved.
                 </p>
             </div>
         </div>
