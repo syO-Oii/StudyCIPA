@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="dto.Manager"%>
 <%
 	String memberId = (String)session.getAttribute("MEMBERID");
 	boolean login = memberId == null ? false : true;
@@ -80,8 +81,15 @@
             <li><a href="FreeBoard.checkSwing">자유게시판</a></li>   <!-- 게시판 --> 
         </ul>
 
-        <ul class="util">
-            <li><a href="#">Contact</a></li>
+        <ul class="util">            
+            <% 
+            	Manager sessionManager = (Manager) session.getAttribute("manager");
+            	if(sessionManager.getId().equals("admin")){ 
+            %>
+            	<li><a href="admin.checkSwing">관리자페이지</a></li>
+            <%	} else { %>
+            	<li><a href="#">Contact</a></li>
+            <% 	} %>
             <li><a href="#">Help</a></li>
             <% if (session.getAttribute("manager") == null) { %>
         		<!-- 로그인 상태가 아닌 경우 -->
@@ -97,8 +105,7 @@
     		<% } else { %>
         		<!-- 정보수정 : 로그인 상태인 경우 -->
         		<li><a href="changeInfo.checkSwing">정보수정</a></li>
-    		<% } %>
-    		   		
+    		<% } %> 		
         </ul>
     </div>
 </header>
