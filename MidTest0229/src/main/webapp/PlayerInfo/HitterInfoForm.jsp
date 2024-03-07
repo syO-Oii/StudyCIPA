@@ -71,7 +71,7 @@
         <ul class="util">            
             <% 
             	Manager sessionManager = (Manager) session.getAttribute("manager");
-            	if(sessionManager.getId().equals("admin")){ 
+            	if(sessionManager != null && sessionManager.getId().equals("admin")){
             %>
             	<li><a href="admin.checkSwing">관리자페이지</a></li>
             <%	} else { %>

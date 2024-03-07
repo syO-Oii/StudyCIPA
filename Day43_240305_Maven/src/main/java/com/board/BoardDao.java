@@ -13,9 +13,9 @@ public class BoardDao {
     // DB에 접속하여 Connection 객체를 반환
     private Connection getConnection() throws Exception {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");	// mySQL 내용 넣기
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection(
-        		"jdbc:mysql://localhost:3306/project1", "root", "mysql");
+                    "jdbc:mysql://localhost:3306/project2", "root", "mysql");
 
         return conn;
     }
@@ -65,12 +65,13 @@ public class BoardDao {
                 // 새 DTO 객체를 만들고 글 데이터를 이 객체에 저장
                 BoardDto dto = new BoardDto();
 
-                dto.setNum    (rs.getInt   ("num"    ));
-                dto.setWriter (rs.getString("writer" ));
-                dto.setTitle  (rs.getString("title"  ));
-                dto.setContent(rs.getString("content"));
-                dto.setRegtime(rs.getString("regtime"));
-                dto.setHits   (rs.getInt   ("hits"   ));
+                dto.setNum    (rs.getInt   ("num"     ));
+                dto.setWriter (rs.getString("writer"  ));
+                dto.setTitle  (rs.getString("title"   ));
+                dto.setContent(rs.getString("content" ));
+                dto.setRegtime(rs.getString("regtime" ));
+                dto.setHits   (rs.getInt   ("hits"    ));
+                dto.setMemberno   (rs.getInt   ("memberno"));
 
                 // 이 DTO 객체를 ArrayList에 추가
                 dtoList.add(dto);
@@ -129,10 +130,10 @@ public class BoardDao {
         ) {
             stmt.executeUpdate(String.format(
                     "insert into board " +
-                    "(writer, title, content, regtime, hits)" +
+                    "(writer, title, content, regtime, hits, memberno)" +
                     "values ('%s', '%s', '%s', '%s', 0)",
                     dto.getWriter(), dto.getTitle(), dto.getContent(),
-                    getCurrentTime()));
+                    getCurrentTime(), dto.getMemberno()));
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -170,4 +171,4 @@ public class BoardDao {
             e.printStackTrace();
         }
     }
-}
+}}

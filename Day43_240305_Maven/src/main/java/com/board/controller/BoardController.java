@@ -71,9 +71,10 @@ public class BoardController extends HttpServlet {
             String writer  = request.getParameter("writer" );
             String title   = request.getParameter("title"  );
             String content = request.getParameter("content");
+            int memberno = Integer.parseInt(request.getParameter("memberno"));
 
             try {
-                new BoardService().writeMsg(writer, title, content);
+                new BoardService().writeMsg(writer, title, content, memberno);
                 view = "redirect:list";
 
             } catch(Exception e) {
