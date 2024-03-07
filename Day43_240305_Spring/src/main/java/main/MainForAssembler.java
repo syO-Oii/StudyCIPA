@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import spring.Assembler;
+import assembler.Assembler;
 import spring.ChangePasswordService;
 import spring.DuplicateMemberException;
 import spring.MemberNotFoundException;
@@ -59,7 +59,7 @@ public class MainForAssembler {
 		}
 		
 		try {
-			regSvc.reist(req);
+			regSvc.regist(req);
 			System.out.println("등록했습니다.\n");
 		} catch(DuplicateMemberException e) {
 			System.out.println("이미 존재하는 이메일입니다.\n");
