@@ -10,7 +10,7 @@ public class Board {
 	private int managerno;
 	
 	public Board(String writer, String title, String content) {
-		this(8, writer, title, content, "", 0);
+		this(0, writer, title, content, "", 0);
 	}
 
 	public Board(int num, String writer, String title, String content) {

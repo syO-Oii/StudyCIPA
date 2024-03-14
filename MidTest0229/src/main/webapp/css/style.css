@@ -105,6 +105,10 @@ header .inner #gnb>li:hover>ul {
 
 header .inner #gnb ul {
 	display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 500px; /* 하위 메뉴 너비 설정 */
 }
 
 header .inner ul>li>ul {
@@ -114,9 +118,23 @@ header .inner ul>li>ul {
 	width: 100%;
 }
 
+header .inner #gnb li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: none; /* 하위 메뉴 숨김 */
+}
+
+header .inner #gnb li ul li {
+    display: block;
+    width: 100%; /* 하위 메뉴의 전체 너비 */
+    text-align: center;
+}
 header .inner #gnb li ul li a {
 	font-family: 'Giants-Regular', sans-serif;
-	font-size: 13px;
+    font-size: 13px;
+    display: block;
 }
 
 /* Main Styles */

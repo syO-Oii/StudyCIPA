@@ -113,7 +113,7 @@
     		</tr>
 			<% 
                 // 게시글 목록을 가져오는 부분
-                List<Board> boardList = BoardDao.getInstance().getRecentPosts(20);
+                List<Board> boardList = BoardDao.getInstance().getRecentPosts(100);
 
                 // 가져온 게시글 목록을 순회하며 표에 추가하는 부분
                 for (Board board : boardList) { 

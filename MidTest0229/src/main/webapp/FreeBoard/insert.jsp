@@ -26,12 +26,7 @@
 <%        
         return;
     }
-	/*
-    String memberId = (String) session.getAttribute("MEMBERID");
-    if (memberId == null) {
-    	response.sendRedirect("sessionLoginForm.jsp");
-    }
-    */
+
     BoardDao dao = BoardDao.getInstance();
     Board board = new Board(writer, title, content);
 

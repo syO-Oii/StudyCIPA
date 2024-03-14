@@ -96,7 +96,10 @@
         </ul>
     </div>
 </header>
-
+	
+	<h1>타자 정보</h1>
+	<br/>
+	<h3>스텟 정보 넣을 예정</h3>
 
 	<footer>
         <div class="inner">
@@ -121,8 +124,5 @@
             </div>
         </div>
     </footer>
-
-
-타자
 </body>
 </html>
