@@ -5,8 +5,8 @@
 <%
 p
 
-	Manager member = new Manager("100", "hong@korea.com", "홍길동");
-	request.setAttribute("mmm", member);
+	Manager LoginRequest = new Manager("100", "hong@korea.com", "홍길동");
+	request.setAttribute("mmm", LoginRequest);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@ p
 <title>Insert title here</title>
 </head>
 <body>
-<%=member.getName() %><br/>
+<%=LoginRequest.getName()%><br/>
 ${mmm.name }
 </body>
 </html>
